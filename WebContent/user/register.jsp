@@ -17,18 +17,16 @@
 		</tr>
 	</table>
 	<br>
-	<h1><%=request.getAttribute("mess")%></h1>
-	<br>
 	<s:form action="/user/register" method="post">
 		<table align="center" border="0">
 			<tr>
 				<td><s:textfield name="user.userid" label="用户名" /></td>
 			</tr>
 			<tr>
-				<td><s:password name="passwordOne" label="密码" /></td>
+				<td><s:password name="password" label="密码" /></td>
 			</tr>
 			<tr>
-				<td><s:password name="passwordTwo" label="重复输入密码" /></td>
+				<td><s:password name="password_2" label="重复输入密码" /></td>
 			</tr>
 			<tr>
 				<td><s:textfield name="user.name" label="名字" /></td>

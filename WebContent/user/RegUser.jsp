@@ -28,7 +28,7 @@
 <BR>
 
 <jsp:useBean id="user"
-	type="edu.nju.homeworks.model.User"
+	type="edu.nju.tss.model.User"
 	scope="session"></jsp:useBean> 
 
 <H1>user with id 

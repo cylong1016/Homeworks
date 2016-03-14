@@ -1,4 +1,4 @@
-package edu.nju.homeworks.model;
+package edu.nju.tss.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,4 +12,5 @@ public class Admin extends User {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -5896444895247258238L;
+	
 }

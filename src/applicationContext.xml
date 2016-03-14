@@ -21,7 +21,7 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/jee_test?autoReconnect=true" />
+			value="jdbc:mysql://localhost:3306/tss?autoReconnect=true" />
 		<property name="username" value="root" />
 		<property name="password" value="cyl941016" />
 	</bean>
@@ -31,7 +31,7 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="edu.nju.onlinestock.model" />
+		<property name="packagesToScan" value="edu.nju.tss.model" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
@@ -48,7 +48,7 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<bean id="RegisterAction" class="edu.nju.onlinestock.action.RegisterAction">
+	<bean id="RegisterAction" class="edu.nju.tss.action.RegisterAction">
 	</bean>
 
 	<!-- 定义 Autowired 自动注入 bean -->
@@ -56,7 +56,7 @@
 		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
 
 	<!-- 扫描有注解的文件 base-package 包路径 -->
-	<context:component-scan base-package="edu.nju.onlinestock" />
+	<context:component-scan base-package="edu.nju.tss" />
 	<!-- 声明式容器事务管理 ,transaction-manager指定事务管理器为transactionManager -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
@@ -64,12 +64,12 @@
 			<tx:method name="*" propagation="NOT_SUPPORTED" read-only="true" />
 		</tx:attributes>
 	</tx:advice>
-	<!-- 定义切面，在edu.nju.onlinestock.service包及子包中所有以Service结尾的方法中,执行有关的hibernate 
+	<!-- 定义切面，在edu.nju.tss.service包及子包中所有以Service结尾的方法中,执行有关的hibernate 
 		session的事务操作 -->
 	<aop:config>
 		<!-- 只对业务逻辑层实施事务 -->
 		<aop:pointcut id="serviceOperation"
-			expression="execution( * edu.nju.onlinestock.service..*Service.*(..))" />
+			expression="execution( * edu.nju.tss.service..*Service.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
 	</aop:config>
 </beans>

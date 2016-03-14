@@ -1,4 +1,4 @@
-package edu.nju.homeworks.model;
+package edu.nju.tss.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
