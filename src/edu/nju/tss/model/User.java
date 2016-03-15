@@ -1,6 +1,7 @@
 package edu.nju.tss.model;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -20,6 +21,10 @@ public class User implements Serializable {
 	@Column(columnDefinition = "VARCHAR(255)")
 	protected String name;
 	protected String password;
+	
+	public User() {
+		this.id = UUID.randomUUID().toString();
+	}
 
 	public String getUserid() {
 		return userid;

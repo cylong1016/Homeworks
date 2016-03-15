@@ -9,7 +9,7 @@
 <body>
 	<table width="650" border="0">
 		<tr>
-			<td><a href="index.do">首页</a></td>
+			<td><a href="../index.html">首页</a></td>
 			<td><a href="/login.jsp">登陆</a></td>
 			<td><a href="/register.jsp">注册</a></td>
 			<td><a href="logout.do">退出</a></td>
@@ -20,10 +20,10 @@
 	<s:form action="/user/login" method="post">
 		<table align="center" border="0">
 			<tr>
-				<td><s:textfield name="user.userid" label="用户名" /></td>
+				<td><s:textfield name="admin.userid" label="用户名" /></td>
 			</tr>
 			<tr>
-				<td><s:password name="passwordOne" label="密码" /></td>
+				<td><s:password name="admin.password" label="密码" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><s:submit value="提交" /></td>

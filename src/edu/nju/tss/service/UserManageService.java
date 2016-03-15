@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.nju.tss.model.Admin;
 import edu.nju.tss.model.User;
 
 public interface UserManageService {
 
 	public User validateUser(String userid, String password);
+	public Admin validateAdmin(String userid, String password);
 
 	//	public String validateRegister(User user,String message) throws PasswordNotMatchException ,UsernameExistException;
 

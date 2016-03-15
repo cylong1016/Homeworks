@@ -13,9 +13,6 @@
       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
       http://www.springframework.org/schema/cache 
       http://www.springframework.org/schema/cache/spring-cache-4.0.xsd">
-	<!-- <bean id="..." class="..."> collaborators and configuration for this 
-		bean go here </bean> <bean id="..." class="..."> collaborators and configuration 
-		for this bean go here </bean> more bean definitions go here -->
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -27,7 +24,6 @@
 	</bean>
 
 	<!-- 配置sessionFactory -->
-
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -40,7 +36,6 @@
 				<prop key="hibernate.connection.autocommit">true</prop>
 			</props>
 		</property>
-
 	</bean>
 
 	<bean id="transactionManager"
@@ -48,12 +43,10 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<bean id="RegisterAction" class="edu.nju.tss.action.RegisterAction">
-	</bean>
+	<bean id="LoginAction" class="edu.nju.tss.action.LoginAction"></bean>
 
 	<!-- 定义 Autowired 自动注入 bean -->
-	<bean
-		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
 
 	<!-- 扫描有注解的文件 base-package 包路径 -->
 	<context:component-scan base-package="edu.nju.tss" />
@@ -64,12 +57,10 @@
 			<tx:method name="*" propagation="NOT_SUPPORTED" read-only="true" />
 		</tx:attributes>
 	</tx:advice>
-	<!-- 定义切面，在edu.nju.tss.service包及子包中所有以Service结尾的方法中,执行有关的hibernate 
-		session的事务操作 -->
+	<!-- 定义切面，在edu.nju.tss.service包及子包中所有以Service结尾的方法中,执行有关的hibernate session的事务操作 -->
 	<aop:config>
 		<!-- 只对业务逻辑层实施事务 -->
-		<aop:pointcut id="serviceOperation"
-			expression="execution( * edu.nju.tss.service..*Service.*(..))" />
+		<aop:pointcut id="serviceOperation" expression="execution( * edu.nju.tss.service..*Service.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
 	</aop:config>
 </beans>

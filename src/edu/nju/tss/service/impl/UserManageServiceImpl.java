@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.nju.tss.dao.UserDao;
+import edu.nju.tss.model.Admin;
 import edu.nju.tss.model.User;
 import edu.nju.tss.service.UserManageService;
 
@@ -46,7 +47,6 @@ public class UserManageServiceImpl implements UserManageService {
 		} else if (!user.getPassword().equals(password)) {
 			return null;
 		}
-
 		return user;
 	}
 
@@ -108,6 +108,13 @@ public class UserManageServiceImpl implements UserManageService {
 		System.out.println(" test");
 		return "test";
 
+	}
+
+	@Override
+	public Admin validateAdmin(String userid, String password) {
+		Admin admin = new Admin();
+		admin.setUserid(userid);
+		return admin;
 	}
 
 }
