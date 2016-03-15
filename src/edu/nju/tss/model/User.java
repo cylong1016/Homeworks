@@ -1,30 +1,28 @@
 package edu.nju.tss.model;
 
-import java.io.Serializable;
-import java.util.UUID;
-
 import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Entity;
 
 /**
  * 系统用户
  */
-@MappedSuperclass
-public class User implements Serializable {
+@Entity
+public class User extends ID {
 
 	/** serialVersionUID */
-	protected static final long serialVersionUID = 4599965030145911604L;
-	@Id
-	protected String id;
-	protected String userid;
+	private static final long serialVersionUID = 4599965030145911604L;
+	private String userid;
 	@Column(columnDefinition = "VARCHAR(255)")
-	protected String name;
-	protected String password;
-	
-	public User() {
-		this.id = UUID.randomUUID().toString();
-	}
+	private String password;
+	private String name;
+	private String iden;
+	public static final String TEACHER = "Teacher";
+	public static final String STUDENT = "Student";
+	private String sex;
+	public static final String MALE = "Male";
+	public static final String FEMALE = "Female";
+	private String mail;
+	private String phone;
 
 	public String getUserid() {
 		return userid;
@@ -50,29 +48,36 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	@Column(name = "id", columnDefinition = "CHAR(32)")
-	public String getId() {
-		return id;
+	public String getIden() {
+		return iden;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setIden(String iden) {
+		this.iden = iden;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null)
-			return false;
-		if (obj.getClass() != this.getClass())
-			return false;
-
-		User another = (User)obj;
-		return this.id.equals(another.id);
+	public String getSex() {
+		return sex;
 	}
 
-	@Override
-	public int hashCode() {
-		return this.id.hashCode();
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 }

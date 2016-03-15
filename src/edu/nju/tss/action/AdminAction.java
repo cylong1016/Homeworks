@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import edu.nju.tss.model.Admin;
 
 @Controller
-public class CourseListAction extends BaseAction {
+public class AdminAction extends BaseAction {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -5631473478930386952L;
@@ -13,7 +13,6 @@ public class CourseListAction extends BaseAction {
 	private Admin admin;
 
 	public String execute() {
-		
 		return SUCCESS;
 	}
 

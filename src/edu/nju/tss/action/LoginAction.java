@@ -20,7 +20,7 @@ public class LoginAction extends BaseAction {
 		String password = request.getParameter("admin.password");
 		admin = userService.validateAdmin(userid, password);
 		if (admin != null) {
-			session.put("user", admin);
+			session.put("admin", admin);
 			return SUCCESS;
 		}
 		return ERROR;

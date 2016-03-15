@@ -97,7 +97,7 @@ public class BaseDaoImpl implements BaseDao {
 			e.printStackTrace();
 		}
 	}
-
+	
 	/**
 	 * 更新
 	 * @param bean
