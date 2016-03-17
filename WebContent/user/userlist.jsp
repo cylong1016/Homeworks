@@ -19,8 +19,8 @@
 	</div>
 	<div class="nav-center">
 		<ul class="nav navbar-nav">
-			<li class="active"><a href="">用户管理 </a></li>
-			<li><a href="">教学计划 </a></li>
+			<li class="active"><a href="<%=request.getContextPath() + "/user/userlist" %>">用户管理 </a></li>
+			<li><a href="<%=request.getContextPath() + "/user/courselist" %>">教学计划 </a></li>
 			<li><a href="">课程管理 </a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">

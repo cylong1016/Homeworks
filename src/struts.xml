@@ -36,5 +36,8 @@
 				<param name="root">message</param>
 			</result>
 		</action>
+		<action name="courselist" class="edu.nju.tss.action.CourseListAction">
+			<result name="success">/user/courselist.jsp</result>
+		</action>
 	</package>
 </struts>
