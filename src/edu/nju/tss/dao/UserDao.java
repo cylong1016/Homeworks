@@ -1,5 +1,7 @@
 package edu.nju.tss.dao;
 
+import java.util.List;
+
 import edu.nju.tss.model.User;
 
 public interface UserDao {
@@ -30,5 +32,21 @@ public interface UserDao {
 	 * @version 2016年3月16日 上午1:52:27
 	 */
 	public void updateByUserid(User user);
+	
+	/**
+	 * 返回全部的用户列表
+	 * @return
+	 * @author cylong
+	 * @version 2016年3月16日  下午4:24:53
+	 */
+	public List<?> list();
+	
+	/**
+	 * 删除用户
+	 * @param user
+	 * @author cylong
+	 * @version 2016年3月16日  下午5:59:57
+	 */
+	public void delete(User user);
 
 }

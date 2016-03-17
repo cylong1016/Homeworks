@@ -22,12 +22,7 @@ public class UserDaoImpl implements UserDao {
 	 * @see edu.nju.tss.dao.UserDao#save(edu.nju.tss.model.User)
 	 */
 	public void save(User user) {
-		try {
-			baseDao.save(user);
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
+		baseDao.save(user);
 	}
 
 	/**
@@ -49,6 +44,19 @@ public class UserDaoImpl implements UserDao {
 	 */
 	public void updateByUserid(User user) {
 
+	}
+
+	@Override
+	public List<?> list() {
+		Session session = baseDao.getSession();
+		Criteria criteria = session.createCriteria(User.class);
+		List<?> list = criteria.list();
+		return list;
+	}
+
+	@Override
+	public void delete(User user) {
+		baseDao.delete(user);
 	}
 
 }

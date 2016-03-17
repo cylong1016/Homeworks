@@ -4,7 +4,11 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-	<package name="user" namespace="/user" extends="struts-default">
+
+ 	<!--解决乱码    --> 
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant> 
+
+	<package name="user" namespace="/user" extends="struts-default,json-default">
 		<action name="login" class="edu.nju.tss.action.LoginAction">
 			<result name="success" type="redirectAction">admin</result>
 			<result name="error">/user/login.jsp</result>
@@ -16,8 +20,16 @@
 			<result name="success">/user/userlist.jsp</result>
 		</action>
 		<action name="register" class="edu.nju.tss.action.RegisterAction" method="register">
-			<result name="success">/user/userlist.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="ActionName">userlist</param>
+				<param name="message">${message}</param>
+			</result>
 			<result name="input">/user/register.jsp</result>
+		</action>
+		<action name="deleteuser" class="edu.nju.tss.action.DeleteUserAction" method="deleteUser">
+			<result type="json">
+				<param name="root">message</param>
+			</result>
 		</action>
 	</package>
 </struts>

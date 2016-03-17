@@ -15,12 +15,12 @@ public class User extends ID {
 	@Column(columnDefinition = "VARCHAR(255)")
 	private String password;
 	private String name;
-	private String iden;
 	public static final String TEACHER = "Teacher";
 	public static final String STUDENT = "Student";
-	private String sex;
+	private String iden = TEACHER;
 	public static final String MALE = "Male";
 	public static final String FEMALE = "Female";
+	private String sex = MALE;
 	private String mail;
 	private String phone;
 

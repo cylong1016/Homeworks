@@ -1,5 +1,7 @@
 package edu.nju.tss.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,6 +65,16 @@ public class UserManageServiceImpl implements UserManageService {
 			userDao.save(user);
 			return message;
 		}
+	}
+
+	@Override
+	public List<?> userList() {
+		return userDao.list();
+	}
+
+	@Override
+	public void delete(User user) {
+		userDao.delete(user);
 	}
 
 }
