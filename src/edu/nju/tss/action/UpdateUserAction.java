@@ -7,22 +7,20 @@ import edu.nju.tss.model.User;
 import edu.nju.tss.service.UserManageService;
 
 @Controller
-public class DeleteUserAction extends BaseAction {
+public class UpdateUserAction extends BaseAction {
 
 	/** serialVersionUID */
-	private static final long serialVersionUID = -7483163132247280750L;
+	private static final long serialVersionUID = 6145236856437242832L;
 
 	@Autowired
 	private UserManageService userService;
 	private User user;
 	private String message;
 
-	public String deleteUser() {
-		String id = request.getParameter("id");
-		user = new User();
-		user.setId(id);
-//		userService.delete(user);
-		message = "{'message': '删除成功 '}";
+	public String updateUser() {
+		System.out.println(user.getId() + ":user.id");
+		userService.update(user);
+		message = "{'message': '更新成功 '}";
 		return SUCCESS;
 	}
 

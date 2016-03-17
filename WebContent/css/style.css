@@ -1,0 +1,356 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: '微软雅黑';
+	font-size: 14px;
+	background: #f4f4f4 url(../images/bg.gif) repeat top left;
+	color: #333;
+	overflow-y: scroll;
+}
+/* 除了导航栏的其他内容容器 */
+div.box {
+	background-color: rgba(240,240,240,0.7);
+	width: 70%;
+	min-width: 760px;
+	height: auto;
+	padding: 30px 0;
+	margin-top: 50px;
+}
+
+input[type="text"] {
+    outline-color: #DDD;
+	padding: 2px 3px;
+}
+
+/* 侧边栏 */
+ul.sidebar {
+	float: left;
+	width: 15%;
+	min-width: 100px;
+	line-height: 30px;
+}
+
+ul.sidebar a {
+	color: #111;
+}
+
+/* 导航栏的头像 */
+.nav .avatar {
+	width: 20px;
+	border-radius: 2px;
+}
+
+/* 侧面的大头像 */
+div#avatar {
+	float: right;
+	margin-right: 10px;
+	width: 14%;
+	min-height: 200px;
+	text-align: center;
+}
+
+div#avatar img{
+	width: 90%;
+	border-radius: 50%;
+	box-shadow: 0 0 10px #aaa;
+}
+
+div#avatar a:link, a:visited {
+	font-weight: bold;
+	font-size: 14px;
+	color: #F3726D;
+	padding: 4px;
+	text-decoration: none;
+}
+
+div#avatar a:hover,a:active {
+	color: #F03931;
+}
+
+/******************** 登陆界面 *********************/
+h1 {
+	font-size: 56px;
+}
+
+h2 {
+	font-size: 20px;
+	padding: 0px 0px 40px 0px;
+	color: #AAA;
+}
+
+p {
+	padding: 5px 0px;
+}
+
+.wrapper {
+	width: 960px;
+	margin: 20px auto;
+	min-height: 550px;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+/* Form Style */
+.form_wrapper {
+	background:#fff;
+	border:1px solid #ddd;
+	margin:0 auto;
+	width:350px;
+	font-size:16px;
+	-moz-box-shadow:1px 1px 7px #ccc;
+	-webkit-box-shadow:1px 1px 7px #ccc;
+	box-shadow:1px 1px 7px #ccc;
+}
+
+.form_wrapper h3 {
+	padding:20px 30px 20px 30px;
+	background-color:#F3726D;
+	color:#fff;
+	font-size:25px;
+	border-bottom:1px solid #ddd;
+}
+
+.form_wrapper form {
+	display:none;
+	background:#fff;
+}
+
+.form_wrapper .column {
+	width:47%;
+	float:left;
+}
+
+form.active {
+	display:block;
+}
+
+form.login {
+	width:350px;
+}
+
+form.register {
+	width:350px;
+}
+form.forgot_password {
+	width:350px;
+}
+
+.form_wrapper a {
+	text-decoration:none;
+	color:#777;
+	font-size:12px;
+}
+
+.form_wrapper a:hover {
+	color:#666;
+}
+
+.form_wrapper label {
+	display:block;
+	color: #666;
+	padding:10px 30px 0px 30px;
+	margin:10px 0px 0px 0px;
+}
+
+.form_wrapper input[type="text"],
+.form_wrapper input[type="password"] {
+	border: solid 1px #E5E5E5;
+	background: #FFFFFF;
+	margin: 5px 30px 0px 30px;
+	padding: 9px;
+	display:block;
+	font-size:16px;
+	width:76%;
+	background:
+		-webkit-gradient(
+			linear,
+			left top,
+			left 25,
+			from(#FFFFFF),
+			color-stop(4%, #EEEEEE),
+			to(#FFFFFF)
+		);
+	background:
+		-moz-linear-gradient(
+			top,
+			#FFFFFF,
+			#EEEEEE 1px,
+			#FFFFFF 25px
+			);
+	-moz-box-shadow: 0px 0px 8px #f0f0f0;
+	-webkit-box-shadow: 0px 0px 8px #f0f0f0;
+	box-shadow: 0px 0px 8px #f0f0f0;
+}
+.form_wrapper input[type="text"]:focus,
+.form_wrapper input[type="password"]:focus {
+	background:#feffef;
+}
+
+.form_wrapper .bottom {
+	background-color:#FFF;
+	border-top:1px solid #ddd;
+	margin-top:20px;
+	clear:both;
+	color:#666;
+	text-shadow:0px 0px 0px #666;
+}
+
+.form_wrapper .bottom a {
+	display:block;
+	clear:both;
+	padding:10px 30px;
+	text-align:right;
+	color:#666;
+	text-shadow:1px 1px 1px #ddd;
+}
+
+.form_wrapper a.forgot {
+	float:right;
+	font-style:italic;
+	line-height:24px;
+	color:#F3726D;
+	text-shadow:1px 1px 1px #fff;
+}
+
+.form_wrapper a.forgot:hover {
+	color:#666;
+}
+
+.form_wrapper div.remember {
+	float:left;
+	width:140px;
+	margin:20px 0px 20px 30px;
+	font-size:11px;
+}
+
+.form_wrapper div.remember input {
+	float: left;
+	margin: 2px 5px 0px 0px;
+}
+
+.form_wrapper span.error {
+	visibility: hidden;
+	color: red;
+	font-size: 11px;
+	font-style: italic;
+	display: block;
+	margin: 4px 30px;
+}
+
+/******************** 登陆界面结束 *********************/
+
+/******************** 动态 *********************/
+.item-name {
+	display: block;
+	color: black;
+	font-size: 15px;
+}
+
+.item-avatar {
+	float: left;
+	border-radius: 50%;
+	width: 40px;
+	margin: 0 15px;
+}
+
+.item-date {
+	font-size: 12px;
+}
+
+.item-content {
+	margin-left:  70px;
+	margin-top: 10px;
+}
+/******************** 动态结束 *********************/
+
+.button {
+	float: right;
+	border: 0 none;
+	border-radius: 2px 2px 2px 2px;
+	color: #FFFFFF;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 20px;
+	margin:15px 20px 10px 10px;
+	padding: 7px 10px;
+	text-transform: none;
+	transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	-webkit-transition: all 0.3s ease 0s;
+	width: 100px;
+	/* auto */
+	text-align: center;
+	/* DELETE WHEN WIDTH AUTO */
+}
+
+.button.pink {
+	background: none repeat scroll 0 0 #F3726D;
+	color: white;
+}
+
+.button.red {
+	background: none repeat scroll 0 0 #ff0000;
+	color: white;
+}
+
+.button.pink:hover {
+	background: none repeat scroll 0 0 #303030;
+	color: white;
+}
+
+.button.red:hover {
+	background: none repeat scroll 0 0 #303030;
+	color: white;
+}
+
+.error {
+	visibility: hidden;
+	color: red;
+	font-size: 11px;
+	font-style: italic;
+	margin: 4px 30px;
+}
+
+textarea {
+	padding: 3px 4px;
+	resize: none;
+	outline-color: #DDD;
+	border-color: #CCC;
+}
+
+.success {
+    visibility: hidden;
+	background-color: #F3726D;
+	text-align: center;
+	line-height: 30px;
+    display: block;
+    color: #EEE;
+	width: 100%;
+	height: 30px;
+    margin: -30px auto 0;
+}
+
+.notdeveloped {
+	font-size: 30px;
+	font-weight: bold;
+	color: #F3726d;
+	text-align: center;
+	line-height: 100px;
+	width: 100%;
+	height: 100px;
+}

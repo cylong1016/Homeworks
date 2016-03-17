@@ -1,0 +1,111 @@
+div.content {
+	background-color: rgba(255, 255, 255, 0.9);
+	width: 85%;
+	min-width: 500px;
+	height: auto;
+	margin: 0 0px 20px 15%;
+	padding: 20px 15px;
+}
+
+.profile_list {
+	font-size: 14px;
+	width: 100%;
+}
+
+.profile_list td {
+	padding: 20px;
+}
+
+.profile_list .first_col {
+	text-align: right;
+	width: 30%;
+}
+
+.profile_list input[type="text"] {
+	border: 1px solid #CCCCCC;
+	width: 130px;
+	padding: 0 5px;
+}
+
+.profile_list input[type="password"] {
+	border: 1px solid #CCCCCC;
+	width: 130px;
+	padding: 0 5px;
+}
+
+
+.profile_list input[id="uname"] {
+	width: 100px;
+}
+
+.profile_list input[id="mail"] {
+	width: 250px;
+}
+
+.profile_list textarea {
+	width: 90%;
+	min-height: 80px;
+}
+
+.profile_list label {
+	font-weight: normal;
+	margin: 0 10px;
+}
+
+.input-group {
+	margin: 20px 20%;
+}
+
+.userlist-tab {
+	margin: 3px auto;
+}
+
+.item-avatar {
+	width: 25px;
+	background-color: black;
+}
+
+table.userlist {
+	text-align: center;
+	font-size: 14px;
+	color: #303030;
+	border-color: rgba(0,0,0,0);
+	border-collapse: collapse;
+	width: 90%;
+	margin: 20px auto;
+}
+
+table.userlist th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: rgba(0,0,0,0);
+	background-color: #DEDEDE;
+	text-align: center;
+}
+
+table.userlist tr:hover th {
+	color: #303030;
+}
+
+table.userlist tr {
+	padding: 8px;
+	height: 40px;
+}
+
+table.userlist tr:hover {
+	cursor: pointer;
+	background-color: #F3726D;
+	color: white;
+}
+
+table.userlist td {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #DEDEDE;
+	text-align: center;
+}
+
+button.del {
+	width: 50px;
+}

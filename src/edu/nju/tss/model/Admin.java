@@ -14,10 +14,15 @@ public class Admin extends ID {
 	/** serialVersionUID */
 	private static final long serialVersionUID = -5896444895247258238L;
 
-	protected String userid;
+	private String userid;
 	@Column(columnDefinition = "VARCHAR(255)")
-	protected String name;
-	protected String password;
+	private String name;
+	private String password;
+	private String avatar;
+	
+	public Admin() {
+		this.avatar = "../images/admin.jpg";
+	}
 
 	public String getUserid() {
 		return userid;
@@ -41,6 +46,14 @@ public class Admin extends ID {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 }

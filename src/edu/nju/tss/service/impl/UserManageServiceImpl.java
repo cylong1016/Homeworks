@@ -59,7 +59,7 @@ public class UserManageServiceImpl implements UserManageService {
 	public String registerUser(User user) {
 		String message = null;
 		if (validateUser(user.getUserid(), user.getPassword()) != null) {
-			message = "用户名存在";
+			message = "用户名" + user.getUserid() +"存在!注册失败!";
 			return message;
 		} else {
 			userDao.save(user);
@@ -75,6 +75,11 @@ public class UserManageServiceImpl implements UserManageService {
 	@Override
 	public void delete(User user) {
 		userDao.delete(user);
+	}
+
+	@Override
+	public void update(User user) {
+		userDao.update(user);
 	}
 
 }

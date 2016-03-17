@@ -18,9 +18,11 @@ public interface UserManageService {
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public String registerUser(User user);
-	
+
 	public List<?> userList();
-	
+
 	public void delete(User user);
+
+	public void update(User user);
 
 }

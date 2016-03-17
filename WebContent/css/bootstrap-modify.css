@@ -1,0 +1,106 @@
+/*
+ * 2015-10-28
+ * Created by cylong
+ * 对bootstrap做的小小的修改
+ */
+
+.navbar{
+	border-radius: 0;
+	width: 100%;
+	min-width: 800px;
+	min-height: 50px;
+}
+
+div.navbar-header {
+	padding-left: 10%;
+}
+
+.nav-center {
+    padding-left: 20%;
+	padding-right: 20%;
+}
+
+.nav.nav-tabs a{
+	border-radius: 0;
+	color: #666;
+}
+
+div.progress {
+	border-radius: 0;
+	margin: 0 5%;
+}
+
+div.list-group {
+	margin: 0 0;
+}
+
+.list-group-item:first-child {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+.list-group-item:last-child {
+	margin-bottom: 0;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+a.list-group-item {
+	background-color: rgba(255, 255, 255, 0);
+}
+
+a.list-group-item:hover,
+button.list-group-item:hover,
+a.list-group-item:focus,
+button.list-group-item:focus {
+	color: #EEE;
+	background-color: #F3726D;
+}
+
+.btn-primary {
+	border-radius: 0;
+}
+
+.nav-tabs > li > a {
+	color: #666;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+	color: #F3726D;
+	background-color: #fff;
+	border: 1px solid #FFF;
+	border-bottom-color: #F3726D;
+}
+
+.nav-tabs > li > a:hover {
+	border-bottom-color: #F3726D;
+	color: #F3726D;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+	color: #EEE;
+	background-color: #F3726D;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #F3726D;
+  background-color: transparent;
+}
+
+.progress-bar {
+	background-color: #F3726D;
+}
+
+.input-group-sm > .input-group-addon {
+	border-radius: 0;
+	color: white;
+	background-color: #F3726D;
+}
+
+.input-group-sm .form-control {
+	outline-color: #F3726D;
+}

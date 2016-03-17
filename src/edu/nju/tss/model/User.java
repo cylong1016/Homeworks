@@ -15,6 +15,7 @@ public class User extends ID {
 	@Column(columnDefinition = "VARCHAR(255)")
 	private String password;
 	private String name;
+	private String avatar;
 	public static final String TEACHER = "Teacher";
 	public static final String STUDENT = "Student";
 	private String iden = TEACHER;
@@ -23,6 +24,11 @@ public class User extends ID {
 	private String sex = MALE;
 	private String mail;
 	private String phone;
+	
+	public User() {
+		// 默认头像
+		this.avatar = "../images/default.jpg";
+	}
 
 	public String getUserid() {
 		return userid;
@@ -46,6 +52,14 @@ public class User extends ID {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 	public String getIden() {

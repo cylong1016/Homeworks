@@ -25,6 +25,7 @@ public class RegisterAction extends BaseAction {
 		}
 		message = userService.registerUser(user);
 		if (message != null) {
+			System.out.println(message);
 			return INPUT;
 		} else {
 			session.put("user", user);

@@ -49,4 +49,6 @@ public interface UserDao {
 	 */
 	public void delete(User user);
 
+	public void update(User user);
+
 }

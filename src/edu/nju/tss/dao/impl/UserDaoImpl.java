@@ -59,4 +59,9 @@ public class UserDaoImpl implements UserDao {
 		baseDao.delete(user);
 	}
 
+	@Override
+	public void update(User user) {
+		baseDao.update(user);
+	}
+
 }
