@@ -1,5 +1,6 @@
 package edu.nju.tss.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +30,13 @@ public class UserManageServiceImpl implements UserManageService {
 		}
 		return admin;
 	}
-	
+
 	@Override
 	public User validateUser(String userid, String password) {
 		User user = (User)userDao.find("userid", userid, User.class);
-		if(user == null) {
+		if (user == null) {
 			return null;
-		} else if(!user.getPassword().equals(password)) {
+		} else if (!user.getPassword().equals(password)) {
 			return null;
 		}
 		return user;
@@ -59,7 +60,7 @@ public class UserManageServiceImpl implements UserManageService {
 	public String registerUser(User user) {
 		String message = null;
 		if (validateUser(user.getUserid(), user.getPassword()) != null) {
-			message = "用户名" + user.getUserid() +"存在!注册失败!";
+			message = "用户名" + user.getUserid() + "存在!注册失败!";
 			return message;
 		} else {
 			userDao.save(user);
@@ -80,6 +81,19 @@ public class UserManageServiceImpl implements UserManageService {
 	@Override
 	public void update(User user) {
 		userDao.update(user);
+	}
+
+	@Override
+	public List<User> teacherList() {
+		@SuppressWarnings("unchecked")
+		List<User> userList = (List<User>)userDao.list();
+		List<User> teacherList = new ArrayList<User>();
+		for(User user : userList) {
+			if(user.getIden().equals(User.TEACHER)) {
+				teacherList.add(user);
+			}
+		}
+		return teacherList;
 	}
 
 }

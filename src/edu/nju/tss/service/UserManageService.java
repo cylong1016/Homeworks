@@ -25,4 +25,6 @@ public interface UserManageService {
 
 	public void update(User user);
 
+	public List<User> teacherList();
+
 }

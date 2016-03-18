@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" import="edu.nju.tss.model.User" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE>
 <html lang="zh-CN">
@@ -13,6 +13,12 @@
 	<link href="<%=request.getContextPath() + "/css/userlist.css" %>" rel="stylesheet">
 </head>
 <body>
+<%
+	String teacher = User.TEACHER;
+	String student = User.STUDENT;
+	String male = User.MALE;
+	String female = User.FEMALE;
+%>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="navbar-header">
 		<a class="navbar-brand" href="">课程管理系统</a>
@@ -21,7 +27,6 @@
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="<%=request.getContextPath() + "/user/userlist" %>">用户管理 </a></li>
 			<li><a href="<%=request.getContextPath() + "/user/courselist" %>">教学计划 </a></li>
-			<li><a href="">课程管理 </a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<jsp:useBean id="admin" type="edu.nju.tss.model.Admin" scope="session" /> 
@@ -51,7 +56,6 @@
 					<li role="presentation" class="active"><a href="#teacher" data-toggle="tab">老师</a></li>
 					<li role="presentation"><a href="#student" data-toggle="tab">学生</a></li>
 				</ul>
-				
 				<div class="tab-content">
 					<div class="tab-pane fade in active" id="teacher">
 						<table class="userlist">
@@ -82,7 +86,6 @@
 									<td>${user.sex}</td>
 									<td>${user.phone}</td>
 									<td>${user.mail}</td>
-									<%-- <td><button class="button pink del" id="${user.id}">删除</button></td>  --%>
 								</tr>
 							</s:if>
 							</s:iterator>
@@ -117,7 +120,6 @@
 									<td>${user.sex}</td>
 									<td>${user.phone}</td>
 									<td>${user.mail}</td>
-									<%-- <td><button class="button pink del" id="${user.id}">删除</button></td>  --%>
 								</tr>
 							</s:if>
 							</s:iterator>
@@ -195,7 +197,7 @@
 					<table class="profile_list">
 						<tr>
 							<td class="first_col">* 用户名</td>
-							<td><s:textfield id="userid" name="user.userid"/>
+							<td><s:textfield id="userid" name="user.userid" disabled="true" />
 							<span id="userid_error" class="error">请输入用户名</span></td>
 						</tr>
 						<tr>
@@ -269,56 +271,12 @@
 	var hint = $("#hint");
 	var message = "<%=request.getParameter("message") %>";
 	
-	function del($id) {
-		$.ajax({
-			type:"post",
-			url:"<%=request.getContextPath() + "/user/deleteuser" %>",
-			data:{//设置数据源 
-				id: $id
-			},
-			dataType:"json",
-			success:function(data){
-				var d = eval("(" + data + ")");
-				hint.text(d.message);
-				hint.css("visibility", "visible");
-				hint.fadeIn("fast");
-				hint.fadeOut(3000);	// 几秒后消失
-				$("#" + $id).hide(1000);
-			},
-			error:function(){
-				alert("系统异常，请稍后重试！");
-			}
-		})
-	}
 	$(".del").click(function(){
-		del($(this).attr("id"));
+		del($(this).attr("id"), hint, "<%=request.getContextPath() + "/user/deleteuser" %>");
 	});
 	
-	function upd() {
-		var form_data = $("#userinfo-form").serialize();
-		$.ajax({
-			type : "post",
-			url : "<%=request.getContextPath() + "/user/updateuser" %>",
-			data : form_data,
-			cache : false,
-			dataType : "json",
-			success : function(data) {
-				var d = eval("(" + data + ")");
-				hint.text(d.message);
-				hint.css("visibility", "visible");
-				hint.fadeIn("fast");
-				hint.fadeOut(3000);	// 几秒后消失
-				window.location.reload(); //刷新当前页面.
-			},
-			error : function(data) {
-				alert("系统异常，请稍后重试！");
-			}
-		});  
-
-	}
-	
 	$(".upd").click(function(){
-		upd();
+		upd($("#userinfo-form").serialize(), hint, "<%=request.getContextPath() + "/user/updateuser" %>");
 	});
 	
 	if(message != "null") {

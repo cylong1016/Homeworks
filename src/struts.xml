@@ -38,6 +38,27 @@
 		</action>
 		<action name="courselist" class="edu.nju.tss.action.CourseListAction">
 			<result name="success">/user/courselist.jsp</result>
+			<result name="error">/user/login.jsp</result>
+		</action>
+		<action name="setcourse" class="edu.nju.tss.action.SetCourseAction" method="setCourse">
+			<result name="success" type="redirectAction">
+				<param name="ActionName">courselist</param>
+				<param name="message">${message}</param>
+			</result>
+			<result name="input" type="redirectAction">
+				<param name="ActionName">courselist</param>
+				<param name="message">${message}</param>
+			</result>
+		</action>
+		<action name="deletecourse" class="edu.nju.tss.action.DeleteCourseAction" method="deleteCourse">
+			<result type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
+		<action name="updatecourse" class="edu.nju.tss.action.UpdateCourseAction" method="updateCourse">
+			<result type="json">
+				<param name="root">message</param>
+			</result>
 		</action>
 	</package>
 </struts>

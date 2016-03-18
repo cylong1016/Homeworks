@@ -18,7 +18,6 @@ public class UpdateUserAction extends BaseAction {
 	private String message;
 
 	public String updateUser() {
-		System.out.println(user.getId() + ":user.id");
 		userService.update(user);
 		message = "{'message': '更新成功 '}";
 		return SUCCESS;

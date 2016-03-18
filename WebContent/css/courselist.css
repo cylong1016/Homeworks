@@ -1,0 +1,92 @@
+div.content {
+	background-color: rgba(255, 255, 255, 0.9);
+	width: 85%;
+	min-width: 500px;
+	height: auto;
+	margin: 0 0px 20px 15%;
+	padding: 20px 15px;
+}
+
+.courseinfo {
+	font-size: 14px;
+	width: 100%;
+}
+
+.courseinfo td {
+	padding: 20px;
+}
+
+.courseinfo .first_col {
+	text-align: right;
+	width: 30%;
+}
+
+.courseinfo input[type="text"] {
+	border: 1px solid #CCCCCC;
+	width: 130px;
+	padding: 0 5px;
+}
+
+.courseinfo input[id="cname"] {
+	width: 100px;
+}
+
+.courseinfo textarea {
+	width: 90%;
+	min-height: 150px;
+}
+
+.description {
+	text-align: left;
+	vertical-align: top;
+}
+
+.courseinfo label {
+	font-weight: normal;
+	margin: 0 10px;
+}
+
+.input-group {
+	margin: 20px 20%;
+}
+
+table.courselist {
+	text-align: center;
+	font-size: 14px;
+	color: #303030;
+	border-color: rgba(0,0,0,0);
+	border-collapse: collapse;
+	width: 90%;
+	margin: 20px auto;
+}
+
+table.courselist th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: rgba(0,0,0,0);
+	background-color: #DEDEDE;
+	text-align: center;
+}
+
+table.courselist tr:hover th {
+	color: #303030;
+}
+
+table.courselist tr {
+	padding: 8px;
+	height: 40px;
+}
+
+table.courselist tr:hover {
+	cursor: pointer;
+	background-color: #F3726D;
+	color: white;
+}
+
+table.courselist td {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #DEDEDE;
+	text-align: center;
+}

@@ -21,7 +21,7 @@ public class DeleteUserAction extends BaseAction {
 		String id = request.getParameter("id");
 		user = new User();
 		user.setId(id);
-//		userService.delete(user);
+		userService.delete(user);
 		message = "{'message': '删除成功 '}";
 		return SUCCESS;
 	}
