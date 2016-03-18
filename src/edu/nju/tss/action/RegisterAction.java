@@ -17,6 +17,9 @@ public class RegisterAction extends BaseAction {
 	private String message = "";
 
 	public String register() {
+		if(session.get("admin") == null) {
+			return ERROR;
+		}
 		if (request.getParameter("user.password").equals(request.getParameter("password_2"))) {
 			user.setPassword(request.getParameter("user.password"));
 		} else {

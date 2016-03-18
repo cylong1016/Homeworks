@@ -19,20 +19,21 @@
 	String male = User.MALE;
 	String female = User.FEMALE;
 %>
+<jsp:useBean id="admin" type="edu.nju.tss.model.Admin" scope="session" /> 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="navbar-header">
 		<a class="navbar-brand" href="">课程管理系统</a>
 	</div>
 	<div class="nav-center">
 		<ul class="nav navbar-nav">
-			<li class="active"><a href="<%=request.getContextPath() + "/user/userlist" %>">用户管理 </a></li>
-			<li><a href="<%=request.getContextPath() + "/user/courselist" %>">教学计划 </a></li>
+			<li class="active"><a href="<%=request.getContextPath() + "/admin/userlist" %>">用户管理 </a></li>
+			<li><a href="<%=request.getContextPath() + "/admin/courselist" %>">教学计划 </a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-			<jsp:useBean id="admin" type="edu.nju.tss.model.Admin" scope="session" /> 
 			<li><a href=""><img class="avatar" src="<jsp:getProperty name="admin" property="avatar" />">
 			<jsp:getProperty name="admin" property="name" />
 			</a></li>
+			<li><s:a namespace="/admin" action="logout" >退出</s:a></li>
 		</ul>
 	</div>
 </nav>
@@ -131,7 +132,7 @@
 		<!-- 注册用户 -->
 		<div class="tab-pane fade" id="register">
 			<div class="content">
-				<s:form action="/user/register" method="post" theme="simple">
+				<s:form action="/admin/register" method="post" theme="simple">
 					<table class="profile_list">
 						<tr>
 							<td class="first_col">* 用户名</td>
@@ -193,11 +194,11 @@
 				<h4 class="modal-title" id="myModalLabel">${user.name}</h4>
 			</div>
 			<div class="modal-body">
-				<s:form id="userinfo-form" action="/user/updateuser" method="post" theme="simple">
+				<s:form id="userinfo-form" action="/admin/updateuser" method="post" theme="simple">
 					<table class="profile_list">
 						<tr>
 							<td class="first_col">* 用户名</td>
-							<td><s:textfield id="userid" name="user.userid" disabled="true" />
+							<td><s:textfield id="userid" name="user.userid" readonly="true" />
 							<span id="userid_error" class="error">请输入用户名</span></td>
 						</tr>
 						<tr>
@@ -272,11 +273,11 @@
 	var message = "<%=request.getParameter("message") %>";
 	
 	$(".del").click(function(){
-		del($(this).attr("id"), hint, "<%=request.getContextPath() + "/user/deleteuser" %>");
+		del($(this).attr("id"), hint, "<%=request.getContextPath() + "/admin/deleteuser" %>");
 	});
 	
 	$(".upd").click(function(){
-		upd($("#userinfo-form").serialize(), hint, "<%=request.getContextPath() + "/user/updateuser" %>");
+		upd($("#userinfo-form").serialize(), hint, "<%=request.getContextPath() + "/admin/updateuser" %>");
 	});
 	
 	if(message != "null") {

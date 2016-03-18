@@ -17,6 +17,9 @@ public class UpdateCourseAction extends BaseAction {
 	private String message;
 
 	public String updateCourse() {
+		if(session.get("admin") == null) {
+			return ERROR;
+		}
 		courseService.update(course);
 		message = "{'message': '更新成功 '}";
 		return SUCCESS;

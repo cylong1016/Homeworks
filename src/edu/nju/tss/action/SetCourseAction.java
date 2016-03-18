@@ -17,6 +17,9 @@ public class SetCourseAction extends BaseAction {
 	private String message;
 
 	public String setCourse() {
+		if(session.get("admin") == null) {
+			return ERROR;
+		}
 		String semester = request.getParameter("course.semester");
 		course.setSemester(semester);
 		courseService.setCourse(course);

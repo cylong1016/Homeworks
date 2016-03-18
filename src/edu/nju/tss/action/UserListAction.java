@@ -19,6 +19,9 @@ public class UserListAction extends BaseAction {
 	private String message;
 
 	public String execute() {
+		if(session.get("admin") == null) {
+			return ERROR;
+		}
 		userList = userService.userList();
 		return SUCCESS;
 	}

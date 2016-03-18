@@ -15,7 +15,7 @@
 		<h2>亲！今天你学习了吗？</h2>
 		<div class="content">
 			<div id="form_wrapper" class="form_wrapper">
-				<s:form class="login active" action="/user/login" method="post" theme="simple">
+				<s:form class="login active" action="/admin/login" method="post" theme="simple">
 					<h3>登陆</h3>
 					<div>
 						<label>用户名：</label><span style="color:black" class="glyphicon glyphicon-search" aria-hidden="true"></span>

@@ -13,20 +13,21 @@
 	<link href="<%=request.getContextPath() + "/css/courselist.css" %>" rel="stylesheet">
 </head>
 <body>
+<jsp:useBean id="admin" type="edu.nju.tss.model.Admin" scope="session" /> 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="navbar-header">
 		<a class="navbar-brand" href="">课程管理系统</a>
 	</div>
 	<div class="nav-center">
 		<ul class="nav navbar-nav">
-			<li><a href="<%=request.getContextPath() + "/user/userlist" %>">用户管理 </a></li>
-			<li class="active"><a href="<%=request.getContextPath() + "/user/courselist" %>">教学计划 </a></li>
+			<li><a href="<%=request.getContextPath() + "/admin/userlist" %>">用户管理 </a></li>
+			<li class="active"><a href="<%=request.getContextPath() + "/admin/courselist" %>">教学计划 </a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-			<jsp:useBean id="admin" type="edu.nju.tss.model.Admin" scope="session" /> 
 			<li><a href=""><img class="avatar" src="<jsp:getProperty name="admin" property="avatar" />">
 			<jsp:getProperty name="admin" property="name" />
 			</a></li>
+			<li><s:a namespace="/admin" action="logout" >退出</s:a></li>
 		</ul>
 	</div>
 </nav>
@@ -71,7 +72,7 @@
 		<!-- 设置课程 -->
 		<div class="tab-pane fade" id="setcourse">
 			<div class="content">
-				<s:form action="/user/setcourse" method="post" theme="simple">
+				<s:form action="/admin/setcourse" method="post" theme="simple">
 					<table class="courseinfo">
 						<tr>
 							<td class="first_col">* 课程名称</td>
@@ -117,7 +118,7 @@
 				<h4 class="modal-title" id="myModalLabel"></h4>
 			</div>
 			<div class="modal-body">
-				<s:form id="courseinfo-form" action="/user/updatecourse" method="post" theme="simple">
+				<s:form id="courseinfo-form" action="/admin/updatecourse" method="post" theme="simple">
 					<table class="courseinfo">
 						<tr>
 							<td class="first_col">* 课程名称</td>
@@ -200,11 +201,11 @@
 	})
 	
 	$(".del").click(function(){
-		del($(this).attr("id"), hint, "<%=request.getContextPath() + "/user/deletecourse" %>");
+		del($(this).attr("id"), hint, "<%=request.getContextPath() + "/admin/deletecourse" %>");
 	});
 	
 	$(".upd").click(function(){
-		upd($("#courseinfo-form").serialize(), hint, "<%=request.getContextPath() + "/user/updatecourse" %>");
+		upd($("#courseinfo-form").serialize(), hint, "<%=request.getContextPath() + "/admin/updatecourse" %>");
 	});
 </script>
 </html>

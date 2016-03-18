@@ -18,6 +18,9 @@ public class DeleteUserAction extends BaseAction {
 	private String message;
 
 	public String deleteUser() {
+		if(session.get("admin") == null) {
+			return ERROR;
+		}
 		String id = request.getParameter("id");
 		user = new User();
 		user.setId(id);

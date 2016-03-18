@@ -8,13 +8,17 @@
  	<!--解决乱码    --> 
 	<constant name="struts.i18n.encoding" value="UTF-8"></constant> 
 
-	<package name="user" namespace="/user" extends="struts-default,json-default">
+	<package name="admin" namespace="/admin" extends="struts-default,json-default">
 		<action name="login" class="edu.nju.tss.action.LoginAction">
 			<result name="success" type="redirectAction">userlist</result>
-			<result name="error">/user/login.jsp</result>
+			<result name="error">/login.jsp</result>
+		</action>
+		<action name="logout" class="edu.nju.tss.action.LogoutAction">
+			<result name="success">/login.jsp</result>
 		</action>
 		<action name="userlist" class="edu.nju.tss.action.UserListAction">
-			<result name="success">/user/userlist.jsp</result>
+			<result name="success">/admin/userlist.jsp</result>
+			<result name="error">/login.jsp</result>
 		</action>
 		<action name="register" class="edu.nju.tss.action.RegisterAction" method="register">
 			<result name="success" type="redirectAction">
@@ -25,6 +29,7 @@
 				<param name="ActionName">userlist</param>
 				<param name="message">${message}</param>
 			</result>
+			<result name="error">/login.jsp</result>
 		</action>
 		<action name="deleteuser" class="edu.nju.tss.action.DeleteUserAction" method="deleteUser">
 			<result type="json">
@@ -37,8 +42,8 @@
 			</result>
 		</action>
 		<action name="courselist" class="edu.nju.tss.action.CourseListAction">
-			<result name="success">/user/courselist.jsp</result>
-			<result name="error">/user/login.jsp</result>
+			<result name="success">/admin/courselist.jsp</result>
+			<result name="error">/login.jsp</result>
 		</action>
 		<action name="setcourse" class="edu.nju.tss.action.SetCourseAction" method="setCourse">
 			<result name="success" type="redirectAction">
@@ -49,6 +54,7 @@
 				<param name="ActionName">courselist</param>
 				<param name="message">${message}</param>
 			</result>
+			<result name="error">/login.jsp</result>
 		</action>
 		<action name="deletecourse" class="edu.nju.tss.action.DeleteCourseAction" method="deleteCourse">
 			<result type="json">

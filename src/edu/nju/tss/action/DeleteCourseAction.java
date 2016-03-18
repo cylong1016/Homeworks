@@ -18,6 +18,9 @@ public class DeleteCourseAction extends BaseAction {
 	private String message;
 
 	public String deleteCourse() {
+		if(session.get("admin") == null) {
+			return ERROR;
+		}
 		String id = request.getParameter("id");
 		course = new Course();
 		course.setId(id);
