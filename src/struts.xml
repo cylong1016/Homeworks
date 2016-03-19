@@ -77,6 +77,16 @@
 			<result name="success">/course/courseinfo.jsp</result>
 			<result name="error" type="redirect">/login.jsp</result>
 		</action>
+		<action name="addassistant" class="edu.nju.tss.action.course.AddAssistantAction" method="addAssistant">
+			<result type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
+		<action name="deleteassistant" class="edu.nju.tss.action.course.DeleteAssistantAction" method="deleteAssistant">
+			<result type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
 	</package>
 	<package name="user" namespace="/user" extends="struts-default, json-default">
 		<action name="userinfo" class="edu.nju.tss.action.user.UserInfoAction" method="findUser">

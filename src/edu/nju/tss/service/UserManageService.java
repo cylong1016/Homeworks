@@ -27,6 +27,10 @@ public interface UserManageService {
 
 	public List<User> teacherList();
 
+	public List<User> studentList();
+
 	public User findUser(String id);
+	
+	public User find(String column, String value);
 
 }

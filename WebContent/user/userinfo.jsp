@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="edu.nju.tss.model.User" %>
+<%@ page import="edu.nju.tss.model.User"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE>
 <html lang="zh-CN">
@@ -81,7 +81,7 @@
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li>
-				<s:a namespace="/user" action="userinfo" >
+				<s:a namespace="/user" action="userinfo" target="external">
 					<s:param name="uid" value="#session.user.id"></s:param>
 					<img class="avatar" src="${session.user.avatar}">
 					${session.user.name}

@@ -101,4 +101,22 @@ public class UserManageServiceImpl implements UserManageService {
 		return (User)userDao.find("id", id, User.class);
 	}
 
+	@Override
+	public List<User> studentList() {
+		@SuppressWarnings("unchecked")
+		List<User> userList = (List<User>)userDao.list();
+		List<User> studentList = new ArrayList<User>();
+		for(User user : userList) {
+			if(user.getIden().equals(User.STUDENT)) {
+				studentList.add(user);
+			}
+		}
+		return studentList;
+	}
+
+	@Override
+	public User find(String column, String value) {
+		return (User)userDao.find(column, value, User.class);
+	}
+
 }

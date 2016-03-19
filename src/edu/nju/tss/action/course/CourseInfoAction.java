@@ -1,5 +1,7 @@
 package edu.nju.tss.action.course;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -20,16 +22,36 @@ public class CourseInfoAction extends BaseAction {
 	private UserManageService userService;
 	private Course course;
 	private User user;	// 任课教师
+	private List<User> studentList;
+	private List<User> assistantList;
 
 	public String findCourse() {
-		if(session.get("user") == null) {
+		if (session.get("user") == null) {
 			return ERROR;
 		}
 		String cid = request.getParameter("cid");
+		studentList = userService.studentList();
 		course = courseService.findCourse(cid);
 		user = userService.findUser(course.getInstructor());
 		course.setIname(user.getName());
+		assistantList = courseService.findAssistant(cid);
 		return SUCCESS;
+	}
+
+	public List<User> getAssistantList() {
+		return assistantList;
+	}
+
+	public void setAssistantList(List<User> assistantList) {
+		this.assistantList = assistantList;
+	}
+
+	public List<User> getStudentList() {
+		return studentList;
+	}
+
+	public void setStudentList(List<User> studentList) {
+		this.studentList = studentList;
 	}
 
 	public User getUser() {

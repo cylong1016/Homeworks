@@ -1,12 +1,17 @@
 package edu.nju.tss.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.nju.tss.dao.CourseAssistantsDao;
 import edu.nju.tss.dao.CourseDao;
+import edu.nju.tss.dao.UserDao;
 import edu.nju.tss.model.Course;
+import edu.nju.tss.model.CourseAssistants;
+import edu.nju.tss.model.User;
 import edu.nju.tss.service.CourseManageService;
 
 @Service
@@ -14,7 +19,10 @@ public class CourseManageServiceImpl implements CourseManageService {
 
 	@Autowired
 	private CourseDao courseDao;
-
+	@Autowired
+	private CourseAssistantsDao courseAssistantsDao;
+	@Autowired
+	private UserDao userDao;
 	@Override
 	public String setCourse(Course course) {
 		courseDao.save(course);
@@ -39,6 +47,35 @@ public class CourseManageServiceImpl implements CourseManageService {
 	@Override
 	public Course findCourse(String cid) {
 		return courseDao.find(cid);
+	}
+
+	@Override
+	public void addCourseAssistant(String courseid, String assid) {
+		CourseAssistants ca = new CourseAssistants();
+		ca.setAssistantid(assid);
+		ca.setCourseid(courseid);
+		courseAssistantsDao.save(ca);
+	}
+
+	@Override
+	public CourseAssistants findCourseAssistant(String assid, String courseid) {
+		return courseAssistantsDao.findCourseAssistant(assid, courseid);
+	}
+
+	@Override
+	public List<User> findAssistant(String cid) {
+		List<CourseAssistants> caList = courseAssistantsDao.findAssistant(cid);
+		List<User> assistantList = new ArrayList<User>();
+		for(CourseAssistants ca : caList) {
+			User user = (User)userDao.find("userid", ca.getAssistantid(), User.class);
+			assistantList.add(user);
+		}
+		return assistantList;
+	}
+
+	@Override
+	public void deleteAssistant(String assid, String courseid) {
+		courseAssistantsDao.delete(assid, courseid);
 	}
 
 }

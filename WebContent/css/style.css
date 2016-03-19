@@ -3,6 +3,10 @@
 	padding: 0;
 }
 
+a:link, a:visited  {
+	color: #F3726D;
+}
+
 body {
 	font-family: '微软雅黑';
 	font-size: 14px;
@@ -353,4 +357,13 @@ textarea {
 	line-height: 100px;
 	width: 100%;
 	height: 100px;
+}
+
+.input-group-addon {
+	color: white;
+}
+
+.input-group-addon:HOVER {
+	cursor: pointer;
+	background-color: #808080;
 }

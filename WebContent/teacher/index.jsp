@@ -23,7 +23,7 @@
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li>
-				<s:a namespace="/user" action="userinfo">
+				<s:a namespace="/user" action="userinfo" target="external">
 					<s:param name="uid" value="#session.user.id"></s:param>
 					<img class="avatar" src="${session.user.avatar}">
 					${session.user.name}
@@ -58,7 +58,7 @@
 								</s:a>
 							</td>
 							<td>
-								<s:a namespace="/user" action="userinfo">
+								<s:a namespace="/user" action="userinfo" target="external">
 									<s:param name="uid" value="#course.instructor"></s:param>
 									${course.iname}
 								</s:a>
@@ -89,7 +89,7 @@
 								${course.cname}</s:a>
 							</td>
 							<td>
-								<s:a namespace="/user" action="userinfo">
+								<s:a namespace="/user" action="userinfo" target="external">
 									<s:param name="uid" value="#course.instructor"></s:param>
 									${course.iname}
 								</s:a>
