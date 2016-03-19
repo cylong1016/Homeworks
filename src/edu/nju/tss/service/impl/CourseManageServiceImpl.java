@@ -36,4 +36,9 @@ public class CourseManageServiceImpl implements CourseManageService {
 		courseDao.update(course);
 	}
 
+	@Override
+	public Course findCourse(String cid) {
+		return courseDao.find(cid);
+	}
+
 }

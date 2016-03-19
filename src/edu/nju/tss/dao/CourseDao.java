@@ -37,4 +37,13 @@ public interface CourseDao {
 	 * @version 2016年3月19日  上午12:42:39
 	 */
 	public void update(Course course);
+
+	/**
+	 * 根据ID查找一个课程
+	 * @param cid
+	 * @return
+	 * @author cylong
+	 * @version 2016年3月19日  下午6:35:20
+	 */
+	public Course find(String cid);
 }

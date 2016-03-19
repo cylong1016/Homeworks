@@ -19,12 +19,12 @@
 					<h3>登陆</h3>
 					<div>
 						<label>用户名：</label><span style="color:black" class="glyphicon glyphicon-search" aria-hidden="true"></span>
-						<s:textfield id="username" name="admin.userid"/>
+						<s:textfield id="username" name="user.userid"/>
                            <span id="username_error" class="error">请输入用户名</span>
 					</div>
 					<div>
 						<label>密码：</label>
-						<s:password id="password" name="admin.password"/>
+						<s:password id="password" name="user.password"/>
                            <span id = "password_error" class="error">请输入密码</span>
 					</div>
 					<div class="bottom">

@@ -14,4 +14,6 @@ public interface CourseManageService {
 
 	public void update(Course course);
 
+	public Course findCourse(String cid);
+
 }

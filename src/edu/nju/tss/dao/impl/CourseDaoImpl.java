@@ -44,4 +44,9 @@ public class CourseDaoImpl implements CourseDao {
 		baseDao.update(course);
 	}
 
+	@Override
+	public Course find(String cid) {
+		return (Course)baseDao.load(Course.class, cid);
+	}
+
 }

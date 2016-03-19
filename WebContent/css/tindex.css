@@ -1,0 +1,47 @@
+div.content {
+	background-color: rgba(255, 255, 255, 0.9);
+	width: 85%;
+	min-width: 500px;
+	height: auto;
+	margin: 0 0 20px 15%;
+	padding: 20px 15px;
+}
+
+table.courselist {
+	text-align: center;
+	font-size: 14px;
+	color: #303030;
+	border-color: rgba(0,0,0,0);
+	border-collapse: collapse;
+	width: 90%;
+	margin: 20px auto;
+}
+
+table.courselist th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: rgba(0,0,0,0);
+	background-color: #DEDEDE;
+	text-align: center;
+}
+
+table.courselist tr:hover th {
+	color: #303030;
+}
+
+table.courselist tr {
+	padding: 8px;
+	height: 40px;
+}
+
+table.courselist a:LINK {
+	color: #F3726D;
+}
+
+table.courselist td {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #DEDEDE;
+	text-align: center;
+}

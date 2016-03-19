@@ -18,10 +18,10 @@ public class UpdateUserAction extends BaseAction {
 	private String message;
 
 	public String updateUser() {
-		if(session.get("admin") == null) {
-			return ERROR;
-		}
 		userService.update(user);
+		if(session.get("user") != null) {
+			session.put("user", user);
+		}
 		message = "{'message': '更新成功 '}";
 		return SUCCESS;
 	}

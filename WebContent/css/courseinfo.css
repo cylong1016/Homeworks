@@ -1,0 +1,33 @@
+div.content {
+	background-color: rgba(255, 255, 255, 0.9);
+	width: 85%;
+	min-width: 500px;
+	height: auto;
+	margin: 0 0 20px 15%;
+	padding: 20px 15px;
+}
+
+.courseinfo {
+	font-size: 14px;
+	width: 100%;
+}
+
+.courseinfo td {
+	padding: 20px;
+	border: 0px solid #CCCCCC;
+}
+
+.courseinfo .first_col {
+	text-align: right;
+	width: 18%;
+}
+
+.description {
+	text-align: left;
+	vertical-align: top;
+}
+
+.courseinfo label {
+	font-weight: normal;
+	margin: 0 10px;
+}

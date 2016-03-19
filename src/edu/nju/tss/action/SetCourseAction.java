@@ -21,7 +21,9 @@ public class SetCourseAction extends BaseAction {
 			return ERROR;
 		}
 		String semester = request.getParameter("course.semester");
+		String end = request.getParameter("course.end");
 		course.setSemester(semester);
+		course.setEnd(end);
 		courseService.setCourse(course);
 		message = course.getCname() + "课程已添加！";
 		return SUCCESS;

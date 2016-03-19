@@ -19,9 +19,20 @@ public class Course extends ID implements Comparable<Course> {
 	private String instructor;
 	/** 教师姓名 */
 	private String iname;
+	/** 开课时间 */
 	private String semester;
+	/** 结课时间 */
+	private String end;
 	@Column(columnDefinition = "TEXT")
 	private String description;
+
+	public String getEnd() {
+		return end;
+	}
+
+	public void setEnd(String end) {
+		this.end = end;
+	}
 
 	public String getCname() {
 		return cname;

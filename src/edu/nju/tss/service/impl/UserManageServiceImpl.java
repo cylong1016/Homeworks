@@ -96,4 +96,9 @@ public class UserManageServiceImpl implements UserManageService {
 		return teacherList;
 	}
 
+	@Override
+	public User findUser(String id) {
+		return (User)userDao.find("id", id, User.class);
+	}
+
 }

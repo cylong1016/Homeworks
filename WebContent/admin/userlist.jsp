@@ -13,7 +13,7 @@
 	<link href="<%=request.getContextPath() + "/css/userlist.css" %>" rel="stylesheet">
 </head>
 <body>
-<%
+<%!
 	String teacher = User.TEACHER;
 	String student = User.STUDENT;
 	String male = User.MALE;
@@ -84,7 +84,10 @@
 									<td>${user.name}</td>
 									<td>${user.userid}</td>
 									<td>${user.password}</td>
-									<td>${user.sex}</td>
+									<td>
+										<s:if test="%{#user.sex == 'Male'}">男</s:if>
+										<s:else>女</s:else>
+									</td>
 									<td>${user.phone}</td>
 									<td>${user.mail}</td>
 								</tr>

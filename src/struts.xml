@@ -11,14 +11,15 @@
 	<package name="admin" namespace="/admin" extends="struts-default,json-default">
 		<action name="login" class="edu.nju.tss.action.LoginAction">
 			<result name="success" type="redirectAction">userlist</result>
-			<result name="error">/login.jsp</result>
+			<result name="teacher" type="redirectAction">courselist</result>
+			<result name="error" type="redirect">/login.jsp</result>
 		</action>
 		<action name="logout" class="edu.nju.tss.action.LogoutAction">
-			<result name="success">/login.jsp</result>
+			<result name="success" type="redirect">/login.jsp</result>
 		</action>
 		<action name="userlist" class="edu.nju.tss.action.UserListAction">
-			<result name="success">/admin/userlist.jsp</result>
-			<result name="error">/login.jsp</result>
+			<result name="success" >/admin/userlist.jsp</result>
+			<result name="error" type="redirect">/login.jsp</result>
 		</action>
 		<action name="register" class="edu.nju.tss.action.RegisterAction" method="register">
 			<result name="success" type="redirectAction">
@@ -29,7 +30,7 @@
 				<param name="ActionName">userlist</param>
 				<param name="message">${message}</param>
 			</result>
-			<result name="error">/login.jsp</result>
+			<result name="error" type="redirect">/login.jsp</result>
 		</action>
 		<action name="deleteuser" class="edu.nju.tss.action.DeleteUserAction" method="deleteUser">
 			<result type="json">
@@ -43,7 +44,8 @@
 		</action>
 		<action name="courselist" class="edu.nju.tss.action.CourseListAction">
 			<result name="success">/admin/courselist.jsp</result>
-			<result name="error">/login.jsp</result>
+			<result name="teacher" type="redirect">/teacher/index.jsp</result>
+			<result name="error" type="redirect">/login.jsp</result>
 		</action>
 		<action name="setcourse" class="edu.nju.tss.action.SetCourseAction" method="setCourse">
 			<result name="success" type="redirectAction">
@@ -54,7 +56,7 @@
 				<param name="ActionName">courselist</param>
 				<param name="message">${message}</param>
 			</result>
-			<result name="error">/login.jsp</result>
+			<result name="error" type="redirect">/login.jsp</result>
 		</action>
 		<action name="deletecourse" class="edu.nju.tss.action.DeleteCourseAction" method="deleteCourse">
 			<result type="json">
@@ -65,6 +67,21 @@
 			<result type="json">
 				<param name="root">message</param>
 			</result>
+		</action>
+	</package>
+	<package name="teacher" namespace="/teacher" extends="struts-default, json-default">
+	
+	</package>
+	<package name="course" namespace="/course" extends="struts-default, json-default">
+		<action name="courseinfo" class="edu.nju.tss.action.course.CourseInfoAction" method="findCourse">
+			<result name="success">/course/courseinfo.jsp</result>
+			<result name="error" type="redirect">/login.jsp</result>
+		</action>
+	</package>
+	<package name="user" namespace="/user" extends="struts-default, json-default">
+		<action name="userinfo" class="edu.nju.tss.action.user.UserInfoAction" method="findUser">
+			<result name="success">/user/userinfo.jsp</result>
+			<result name="error" type="redirect">/login.jsp</result>
 		</action>
 	</package>
 </struts>

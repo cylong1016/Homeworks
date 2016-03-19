@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE>
-<html>
+<html lang="zh-CN">
 <head>
 	<title>欢迎来到课程管理系统-课程管理</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,7 +13,7 @@
 	<link href="<%=request.getContextPath() + "/css/courselist.css" %>" rel="stylesheet">
 </head>
 <body>
-<jsp:useBean id="admin" type="edu.nju.tss.model.Admin" scope="session" /> 
+<jsp:useBean id="admin" type="edu.nju.tss.model.Admin" scope="session" />
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="navbar-header">
 		<a class="navbar-brand" href="">课程管理系统</a>
@@ -52,6 +52,7 @@
 						<th>课程名</th>
 						<th>任课教师</th>
 						<th>开课时间</th>
+						<th>结课时间</th>
 					</tr>
 					<s:iterator id="course" value="courseList">
 						<tr id="${course.id}" data-toggle="modal" data-target="#courseinfo"
@@ -60,10 +61,12 @@
 							data-instructor="${course.instructor}"
 							data-iname="${course.iname}"
 							data-semester="${course.semester}"
+							data-end="${course.end}"
 							data-description="${course.description}"> 
 							<td>${course.cname}</td>
 							<td>${course.iname}</td>
 							<td>${course.semester}</td>
+							<td>${course.end}</td>
 						</tr>
 					</s:iterator>
 				</table>
@@ -84,12 +87,16 @@
 							<td><s:select name="course.instructor" list="%{teacherList}"
        							headerKey="空"
        							headerValue="请选择任课老师"
-       							listKey="userid"
+       							listKey="id"
 								listValue="name" /></td>
 						</tr>
 						<tr>
 							<td class="first_col">开课时间</td>
 							<td><input type=month name="course.semester" /></td>
+						</tr>
+						<tr>
+							<td class="first_col">结课时间</td>
+							<td><input type=month name="course.end" /></td>
 						</tr>
 						<tr>
 							<td class="first_col description">课程描述</td>
@@ -130,12 +137,16 @@
 							<td><s:select id="instructor" name="course.instructor" list="%{teacherList}"
        							headerKey="空"
        							headerValue="请选择任课老师"
-       							listKey="userid"
+       							listKey="id"
 								listValue="name" /></td>
 						</tr>
 						<tr>
 							<td class="first_col">开课时间</td>
 							<td><input type=month id="semester" name="course.semester" /></td>
+						</tr>
+						<tr>
+							<td class="first_col">结课时间</td>
+							<td><input type=month id="end" name="course.end" /></td>
 						</tr>
 						<tr>
 							<td class="first_col description">课程描述</td>
@@ -189,12 +200,14 @@
 		var instructor = button.data('instructor')
 		var iname = button.data('iname')
 		var semester = button.data('semester')
+		var end = button.data('end')
 		var description = button.data('description')
 		var modal = $(this)
 		modal.find('.modal-title').text(cname)
 		modal.find('input[name="course.id"]').val(id)
 		modal.find('#cname').val(cname)
 		modal.find('#semester').val(semester);
+		modal.find('#end').val(end);
 		modal.find('#instructor').val(instructor);
 		modal.find('#description').val(description);
 		modal.find('.del').attr("id", id)

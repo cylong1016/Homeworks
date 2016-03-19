@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import edu.nju.tss.model.Admin;
 import edu.nju.tss.model.Course;
 import edu.nju.tss.model.User;
 import edu.nju.tss.service.CourseManageService;
@@ -25,9 +26,6 @@ public class CourseListAction extends BaseAction {
 	private String message;
 
 	public String execute() {
-		if(session.get("admin") == null) {
-			return ERROR;
-		}
 		courseList = courseService.courseList();
 		teacherList = userService.teacherList();
 		Collections.sort(courseList);
@@ -35,12 +33,22 @@ public class CourseListAction extends BaseAction {
 		for(Course course : courseList) {
 			for(Object o : userList) {
 				User user = (User)o;
-				if (user.getUserid().equals(course.getInstructor())) {
+				if (user.getId().equals(course.getInstructor())) {
 					course.setIname(user.getName());
 				}
 			}
 		}
-		return SUCCESS;
+		session.put("courseList", courseList);
+		Admin admin = (Admin)session.get("admin");
+		User user = (User)session.get("user");
+		if (admin != null) {
+			return SUCCESS;	// 到管理员界面
+		} else if(user != null) {
+			if(user.getIden().equals(User.TEACHER)) {
+				return TEACHER;	// 到老师界面
+			}
+		}
+		return ERROR;
 	}
 
 	public List<User> getTeacherList() {
