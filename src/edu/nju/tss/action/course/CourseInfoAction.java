@@ -33,7 +33,7 @@ public class CourseInfoAction extends BaseAction {
 			return ERROR;
 		}
 		String cid = request.getParameter("cid");
-		studentList = userService.studentList();
+		studentList = courseService.findStudent(cid);
 		course = courseService.findCourse(cid);
 		user = userService.findUser(course.getInstructor());
 		course.setIname(user.getName());

@@ -91,6 +91,11 @@
 				<param name="root">message</param>
 			</result>
 		</action>
+		<action name="addstudent" class="edu.nju.tss.action.course.AddStudentAction" method="addStudent">
+			<result type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
 		<action name="deleteassistant" class="edu.nju.tss.action.course.DeleteAssistantAction" method="deleteAssistant">
 			<result type="json">
 				<param name="root">message</param>

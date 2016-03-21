@@ -115,6 +115,10 @@
 						<td class="first_col description">作业描述：</td>
 						<td> ${ass.description}</td>
 					</tr>
+					<tr>
+						<td class="first_col description">上传作业：</td>
+						<td>稍后完成</td>
+					</tr>
 				</table>
 			</div>
 			</s:iterator>
@@ -122,23 +126,34 @@
 		<!-- 课程学生界面 -->
 		<div class="tab-pane fade" id=courseStudent>
 			<div class="content">
+				<div class="input-group input-group-sm">
+					<input type="text" id="studentid" class="form-control" aria-describedby="sizing-addon3" placeholder="输入学生账户添加学生……">
+					<span class="input-group-addon" id="addstu"> 添加  </span>
+				</div>
+			</div>
+			<div class="content">
 				<table class="list">
 					<tr>
-						<th>头像</th>
 						<th>姓名</th>
 						<th>账号</th>
 						<th>性别</th>
 						<th>电话</th>
 						<th>邮箱</th>
+						<th>操作</th>
 					</tr>
-					<s:iterator id="st" value="studentList">
-						<tr id="${st.id}" > 
-							<td><img class="item-avatar" id="${st.id}" src="${st.avatar}"></td>
-							<td>${st.name}</td>
-							<td>${st.userid}</td>
-							<td>${st.sex}</td>
-							<td>${st.phone}</td>
-							<td>${st.mail}</td>
+					<s:iterator id="stu" value="studentList">
+						<tr id="tr${stu.userid}"> 
+							<td>
+								<s:a namespace="/user" action="userinfo" target="external">
+									<s:param name="uid" value="#stu.id"></s:param>
+									${stu.name}
+								</s:a>
+							</td>
+							<td>${stu.userid}</td>
+							<td>${stu.sex}</td>
+							<td>${stu.phone}</td>
+							<td>${stu.mail}</td>
+							<td id="${stu.userid}" class="">删除</td>
 						</tr>
 					</s:iterator>
 				</table>
@@ -227,20 +242,15 @@
 <script src="<%=request.getContextPath() + "/js/bootstrap.js" %>"></script>
 <script src="<%=request.getContextPath() + "/js/my.js" %>"></script>
 <script>
-	var hint = $("#hint");
-	if(message != "null") {
-		hint.css("visibility", "visible");
-		hint.fadeIn("fast");
-		hint.fadeOut(3000);	// 几秒后消失
-	}
 	
-	function addass(hint, url) {
-		var assistantid = $("#assistantid").val();
+	var hint = $("#hint");
+	
+	function adduser(uid, hint, url) {
 		$.ajax({
 			type : "post",
 			url : url,
 			data : {
-				assid: assistantid,
+				uid: uid,
 				courseid: '<%=((Course)request.getAttribute("course")).getId() %>'
 			},
 			cache : false,
@@ -258,7 +268,7 @@
 		});  
 	}
 	
-	function del(hint, url, assid) {
+	function delass(hint, url, assid) {
 		$.ajax({
 			type:"post",
 			url:url,
@@ -283,16 +293,16 @@
 	
 	$(document).ready(function(){
 		$("#addass").on("click", function() {
-			addass(hint, '<%=request.getContextPath() + "/course/addassistant" %>');
+			adduser($("#assistantid").val(), hint, '<%=request.getContextPath() + "/course/addassistant" %>');
 		});
 		
-		$(".delass").click(function() {
-			del(hint, '<%=request.getContextPath() + "/course/deleteassistant" %>', $(this).attr("id"));
+		$("#addstu").on("click", function() {
+			adduser($("#studentid").val(), hint, '<%=request.getContextPath() + "/course/addstudent" %>');
 		});
 		
-		//$("#setassignmentbtn").click(function() {
-		//	upd($("#assigment-form").serialize(), hint, '<%=request.getContextPath() + "/course/setassignment" %>');
-		//});
+		$(".delass").on("click", function() {
+			delass(hint, '<%=request.getContextPath() + "/course/deleteassistant" %>', $(this).attr("id"));
+		});
 	});
 	
 </script>

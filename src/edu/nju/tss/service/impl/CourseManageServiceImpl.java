@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 import edu.nju.tss.dao.AssignmentDao;
 import edu.nju.tss.dao.CourseAssistantsDao;
 import edu.nju.tss.dao.CourseDao;
+import edu.nju.tss.dao.CourseStudentDao;
 import edu.nju.tss.dao.UserDao;
 import edu.nju.tss.model.Assignment;
 import edu.nju.tss.model.Course;
 import edu.nju.tss.model.CourseAssistants;
+import edu.nju.tss.model.CourseStudent;
 import edu.nju.tss.model.User;
 import edu.nju.tss.service.CourseManageService;
 
@@ -24,9 +26,12 @@ public class CourseManageServiceImpl implements CourseManageService {
 	@Autowired
 	private CourseAssistantsDao courseAssistantsDao;
 	@Autowired
+	private CourseStudentDao courseStudentDao;
+	@Autowired
 	private UserDao userDao;
 	@Autowired
 	private AssignmentDao assignmentDao;
+
 	@Override
 	public String setCourse(Course course) {
 		courseDao.save(course);
@@ -90,6 +95,30 @@ public class CourseManageServiceImpl implements CourseManageService {
 	@Override
 	public List<Assignment> findAssignment(String cid) {
 		return assignmentDao.find("courseid", cid);
+	}
+
+	@Override
+	public CourseStudent findCourseStudent(String stuid, String courseid) {
+		return courseStudentDao.findCourseStudent(stuid, courseid);
+	}
+
+	@Override
+	public void addCourseStudent(String courseid, String stuid) {
+		CourseStudent cs = new CourseStudent();
+		cs.setStudentid(stuid);
+		cs.setCourseid(courseid);
+		courseStudentDao.save(cs);
+	}
+	
+	@Override
+	public List<User> findStudent(String cid) {
+		List<CourseStudent> csList = courseStudentDao.findStudent(cid);
+		List<User> studentList = new ArrayList<User>();
+		for(CourseStudent cs : csList) {
+			User user = (User)userDao.find("userid", cs.getStudentid(), User.class);
+			studentList.add(user);
+		}
+		return studentList;
 	}
 
 }
