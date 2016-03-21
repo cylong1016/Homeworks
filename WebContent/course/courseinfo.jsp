@@ -12,6 +12,8 @@
 	<link href="<%=request.getContextPath() + "/css/bootstrap-modify.css" %>" rel="stylesheet">
 	<link href="<%=request.getContextPath() + "/css/style.css" %>" rel="stylesheet">
 	<link href="<%=request.getContextPath() + "/css/courseinfo.css" %>" rel="stylesheet">
+	<link href="<%=request.getContextPath() + "/css/tableinfo.css" %>" rel="stylesheet">
+	<link href="<%=request.getContextPath() + "/css/tablelist.css" %>" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -45,6 +47,7 @@
 		if(my.getId().equals(course.getInstructor())) {
 			out.print("<li role=\"presentation\"><a href=\"#courseStudent\" data-toggle=\"tab\">选课学生</a></li>");
 			out.print("<li role=\"presentation\"><a href=\"#courseAssistants\" data-toggle=\"tab\">课程助教</a></li>");
+			out.print("<li role=\"presentation\"><a href=\"#setassignment\" data-toggle=\"tab\">添加作业</a></li>");
 		}
 		%>
 	</ul>
@@ -54,7 +57,7 @@
 		<!-- 课程信息 -->
 		<div class="tab-pane fade in active" id="courseinfo">
 			<div class="content">
-				<table class="courseinfo">
+				<table class="info">
 					<tr>
 						<td class="first_col">课程名称：</td>
 						<td><s:property value="course.cname" /></td>
@@ -85,14 +88,41 @@
 		</div>
 		<!-- 课程作业 -->
 		<div class="tab-pane fade" id="assignment">
+			<s:iterator id="ass" value="assignmentList">
 			<div class="content">
-				课程作业
+				<table class="info" id="assign-table">
+					<tr>
+						<td class="first_col">提交截止日期：</td>
+						<td> ${ass.deadline}</td>
+					</tr>
+					<tr>
+						<td class="first_col">批改截止日期：</td>
+						<td> ${ass.correctDeadline}</td>
+					</tr>
+					<tr>
+						<td class="first_col">作业文件格式：</td>
+						<td> ${ass.format}</td>
+					</tr>
+					<tr>
+						<td class="first_col">分数：</td>
+						<td> ${ass.score}</td>
+					</tr>
+					<tr>
+						<td class="first_col">附件：</td>
+						<td><a href="fileDownload?file=${ass.fileName}">${ass.fileName}</a></td>
+					</tr>
+					<tr>
+						<td class="first_col description">作业描述：</td>
+						<td> ${ass.description}</td>
+					</tr>
+				</table>
 			</div>
+			</s:iterator>
 		</div>
 		<!-- 课程学生界面 -->
 		<div class="tab-pane fade" id=courseStudent>
 			<div class="content">
-				<table class="studentlist">
+				<table class="list">
 					<tr>
 						<th>头像</th>
 						<th>姓名</th>
@@ -123,7 +153,7 @@
 				</div>
 			</div>
 			<div class="content">
-				<table class="studentlist">
+				<table class="list">
 					<tr>
 						<th>姓名</th>
 						<th>账号</th>
@@ -150,13 +180,59 @@
 				</table>
 			</div>
 		</div>
+		<!-- 添加作业 -->
+		<div class="tab-pane fade" id=setassignment>
+			<div class="content">
+				<s:form action="/course/setassignment" id="assigment-form" method="post" theme="simple" enctype="multipart/form-data">
+					<table class="info">
+						<tr>
+							<td class="first_col">提交截止日期</td>
+							<td><input type="datetime-local" name="assignment.deadline" /></td>
+						</tr>
+						<tr>
+							<td class="first_col">批改截止日期</td>
+							<td><input type="datetime-local" name="assignment.correctDeadline" /></td>
+						</tr>
+						<tr>
+							<td class="first_col">作业文件格式</td>
+							<td><s:textfield name="assignment.format"/></td>
+						</tr>
+						<tr>
+							<td class="first_col">分数</td>
+							<td><s:textfield name="assignment.score"/></td>
+						</tr>
+						<tr>
+							<td class="first_col">附件</td>
+							<td><input type="file" name="attach"></td>
+						</tr>
+						<tr>
+							<td class="first_col description">作业描述</td>
+							<td><s:textarea name="assignment.description" /></td>
+						</tr>
+						<tr>
+							<td class="first_col"></td>
+				   			<td>
+								<input class="button pink" id="setassignmentbtn" type="submit" readonly="readonly" value="添加" />
+							</td>
+						</tr>
+					</table>
+					<input type="hidden" name="course.id" value="${course.id}"/>
+				</s:form>
+			</div>
+		</div>
 	</div>
 </div>
 </body>
 <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
 <script src="<%=request.getContextPath() + "/js/bootstrap.js" %>"></script>
+<script src="<%=request.getContextPath() + "/js/my.js" %>"></script>
 <script>
 	var hint = $("#hint");
+	if(message != "null") {
+		hint.css("visibility", "visible");
+		hint.fadeIn("fast");
+		hint.fadeOut(3000);	// 几秒后消失
+	}
 	
 	function addass(hint, url) {
 		var assistantid = $("#assistantid").val();
@@ -213,6 +289,11 @@
 		$(".delass").click(function() {
 			del(hint, '<%=request.getContextPath() + "/course/deleteassistant" %>', $(this).attr("id"));
 		});
+		
+		//$("#setassignmentbtn").click(function() {
+		//	upd($("#assigment-form").serialize(), hint, '<%=request.getContextPath() + "/course/setassignment" %>');
+		//});
 	});
+	
 </script>
 </html>

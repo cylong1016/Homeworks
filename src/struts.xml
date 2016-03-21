@@ -6,12 +6,20 @@
 <struts>
 
  	<!--解决乱码    --> 
-	<constant name="struts.i18n.encoding" value="UTF-8"></constant> 
-
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<!-- 默认的视图主题 -->
+    <constant name="struts.ui.theme" value="simple" />
+  	<!-- 开发模式下使用,这样可以打印出更详细的错误信息 -->
+    <constant name="struts.devMode" value="true" />
+    <!-- 指定允许上传的文件最大字节数。默认值是2097152(2M) -->
+    <constant name="struts.multipart.maxSize" value="10701096"/>
+    
+    
 	<package name="admin" namespace="/admin" extends="struts-default,json-default">
 		<action name="login" class="edu.nju.tss.action.LoginAction">
 			<result name="success" type="redirectAction">userlist</result>
-			<result name="teacher" type="redirectAction">courselist</result>
+			<result name="teacher" type="redirectAction">courselist</result><!-- 这两个可以并成一个 -->
+			<result name="student" type="redirectAction">courselist</result>
 			<result name="error" type="redirect">/login.jsp</result>
 		</action>
 		<action name="logout" class="edu.nju.tss.action.LogoutAction">
@@ -45,6 +53,7 @@
 		<action name="courselist" class="edu.nju.tss.action.CourseListAction">
 			<result name="success">/admin/courselist.jsp</result>
 			<result name="teacher" type="redirect">/teacher/index.jsp</result>
+			<result name="student" type="redirect">/student/index.jsp</result>
 			<result name="error" type="redirect">/login.jsp</result>
 		</action>
 		<action name="setcourse" class="edu.nju.tss.action.SetCourseAction" method="setCourse">
@@ -87,6 +96,18 @@
 				<param name="root">message</param>
 			</result>
 		</action>
+		<action name="setassignment" class="edu.nju.tss.action.course.SetAssignmentAction" method="setAssignment">
+			<result name="success"  type="redirectAction">
+				<param name="ActionName">courseinfo?cid=${courseid}</param>
+				<param name="message">${message}</param>
+			</result>
+		</action>
+		<action name="fileDownload" class="edu.nju.tss.action.course.FileDownloadAction"  method="download">  
+          	<result name="success" type="stream">  
+              	<param name="contentDisposition">attachment;filename="${file}"</param>  
+              	<param name="inputName">downloadFile</param>  
+			</result>  
+		</action>  
 	</package>
 	<package name="user" namespace="/user" extends="struts-default, json-default">
 		<action name="userinfo" class="edu.nju.tss.action.user.UserInfoAction" method="findUser">

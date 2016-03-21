@@ -47,5 +47,4 @@ function upd(data, hint, url) {
 			alert("系统异常，请稍后重试！");
 		}
 	});  
-
 }

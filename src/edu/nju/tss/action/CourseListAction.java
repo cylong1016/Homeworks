@@ -46,6 +46,8 @@ public class CourseListAction extends BaseAction {
 		} else if(user != null) {
 			if(user.getIden().equals(User.TEACHER)) {
 				return TEACHER;	// 到老师界面
+			} else if(user.getIden().equals(User.STUDENT)) {
+				return STUDENT; // 到学生界面
 			}
 		}
 		return ERROR;

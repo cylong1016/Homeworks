@@ -29,9 +29,10 @@ public class LoginAction extends BaseAction {
 		user = userService.validateUser(userid, password);
 		if(user != null) {
 			session.put("user", user);
-			System.out.println(user.getIden());
 			if(user.getIden().equals(User.TEACHER)) {
 				return TEACHER;
+			} else if(user.getIden().equals(User.STUDENT)) {
+				return STUDENT;
 			}
 		}
 		return ERROR;

@@ -1,0 +1,30 @@
+.info {
+	font-size: 14px;
+	width: 100%;
+}
+
+.info td {
+	padding: 20px;
+	border: 0px solid #CCCCCC;
+}
+
+
+.info label {
+	font-weight: normal;
+	margin: 0 10px;
+}
+
+.info .first_col {
+	text-align: right;
+	width: 18%;
+}
+
+.description {
+	text-align: left;
+	vertical-align: top;
+}
+
+.info textarea {
+	width: 90%;
+	min-height: 150px;
+}

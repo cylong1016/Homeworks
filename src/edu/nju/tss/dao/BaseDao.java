@@ -29,4 +29,6 @@ public interface BaseDao {
 	public void delete(Class<?> c, String id);
 
 	public void delete(Class<?> c, String[] ids);
+	
+	public List<?> find(String column, String value, Class<?> c);
 }

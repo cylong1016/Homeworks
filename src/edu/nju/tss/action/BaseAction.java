@@ -16,6 +16,7 @@ public class BaseAction extends ActionSupport implements SessionAware, ServletRe
 	private static final long serialVersionUID = 1L;
 	
 	public static final String TEACHER = "teacher";
+	public static final String STUDENT = "student";
 
 	public HttpServletRequest request;
 	public HttpServletResponse response;

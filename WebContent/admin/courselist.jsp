@@ -43,7 +43,7 @@
 		<div class="tab-pane fade in active" id="allcourse">
 			<div class="content">
 				<div class="input-group input-group-sm">
-					<input type="text" class="form-control" aria-describedby="sizing-addon3" placeholder="搜索用户……">
+					<input type="text" class="form-control" aria-describedby="sizing-addon3" placeholder="搜索课程……">
 					<span class="input-group-addon" id="sizing-addon3">
 					<a href=""><span style="color:white">搜索</span></a></span>
 				</div>

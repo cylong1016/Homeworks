@@ -1,0 +1,35 @@
+.item-avatar {
+	width: 25px;
+	background-color: #c0c0c0;
+}
+
+table.list {
+	text-align: center;
+	font-size: 14px;
+	color: #303030;
+	border-color: rgba(0,0,0,0);
+	border-collapse: collapse;
+	width: 90%;
+	margin: 20px auto;
+}
+
+table.list th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: rgba(0,0,0,0);
+	background-color: #DEDEDE;
+	text-align: center;
+}
+
+table.list tr {
+	padding: 8px;
+	height: 40px;
+}
+
+table.list td {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #DEDEDE;
+	text-align: center;
+}

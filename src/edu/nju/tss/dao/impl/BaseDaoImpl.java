@@ -2,8 +2,10 @@ package edu.nju.tss.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -152,5 +154,14 @@ public class BaseDaoImpl implements BaseDao {
 				getSession().delete(obj);
 			}
 		}
+	}
+
+	@Override
+	public List<?> find(String column, String value, Class<?> c) {
+		Session session = getSession();
+		Criteria criteria = session.createCriteria(c);
+		criteria.add(Restrictions.eq(column, value));
+		List<?> list = criteria.list();
+		return list;
 	}
 }

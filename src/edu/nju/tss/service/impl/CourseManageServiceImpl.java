@@ -6,9 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.nju.tss.dao.AssignmentDao;
 import edu.nju.tss.dao.CourseAssistantsDao;
 import edu.nju.tss.dao.CourseDao;
 import edu.nju.tss.dao.UserDao;
+import edu.nju.tss.model.Assignment;
 import edu.nju.tss.model.Course;
 import edu.nju.tss.model.CourseAssistants;
 import edu.nju.tss.model.User;
@@ -23,6 +25,8 @@ public class CourseManageServiceImpl implements CourseManageService {
 	private CourseAssistantsDao courseAssistantsDao;
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private AssignmentDao assignmentDao;
 	@Override
 	public String setCourse(Course course) {
 		courseDao.save(course);
@@ -76,6 +80,16 @@ public class CourseManageServiceImpl implements CourseManageService {
 	@Override
 	public void deleteAssistant(String assid, String courseid) {
 		courseAssistantsDao.delete(assid, courseid);
+	}
+
+	@Override
+	public void setAssignment(Assignment assignment) {
+		assignmentDao.save(assignment);
+	}
+
+	@Override
+	public List<Assignment> findAssignment(String cid) {
+		return assignmentDao.find("courseid", cid);
 	}
 
 }
