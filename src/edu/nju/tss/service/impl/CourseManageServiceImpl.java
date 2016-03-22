@@ -150,4 +150,27 @@ public class CourseManageServiceImpl implements CourseManageService {
 		studentAssignmentDao.update(sa);
 	}
 
+	@Override
+	public List<CourseStudent> csList() {
+		return courseStudentDao.list();
+	}
+
+	@Override
+	public List<Course> myCourseList(String userid) {
+		List<CourseStudent> csList = csList();
+		List<Course> cList = courseList();
+		List<Course> myCourseList = new ArrayList<Course>();
+		for(CourseStudent courseStudent : csList) {
+			if(courseStudent.getStudentid().equals(userid)) {
+				String courseid = courseStudent.getCourseid();
+				for(Course course : cList) {
+					if(course.getId().equals(courseid)) {
+						myCourseList.add(course);
+					}
+				}
+			}
+		}
+		return myCourseList;
+	}
+
 }

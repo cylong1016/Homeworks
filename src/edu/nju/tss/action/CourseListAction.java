@@ -23,34 +23,56 @@ public class CourseListAction extends BaseAction {
 	private UserManageService userService;
 	private List<Course> courseList;
 	private List<User> teacherList;
+	private List<Course> myCourseList;
 	private String message;
 
 	public String execute() {
+		Admin admin = (Admin)session.get("admin");
+		User user = (User)session.get("user");
 		courseList = courseService.courseList();
+		if(user != null) {
+			myCourseList = courseService.myCourseList(user.getUserid());
+		}
 		teacherList = userService.teacherList();
 		Collections.sort(courseList);
+		Collections.sort(myCourseList);
 		List<?> userList = userService.userList();
 		for(Course course : courseList) {
 			for(Object o : userList) {
-				User user = (User)o;
-				if (user.getId().equals(course.getInstructor())) {
-					course.setIname(user.getName());
+				User userTemp = (User)o;
+				if (userTemp.getId().equals(course.getInstructor())) {
+					course.setIname(userTemp.getName());
+				}
+			}
+		}
+		for(Course course : myCourseList) {
+			for(Object o : userList) {
+				User userTemp = (User)o;
+				if (userTemp.getId().equals(course.getInstructor())) {
+					course.setIname(userTemp.getName());
 				}
 			}
 		}
 		session.put("courseList", courseList);
-		Admin admin = (Admin)session.get("admin");
-		User user = (User)session.get("user");
+		session.put("myCourseList", myCourseList);
 		if (admin != null) {
 			return SUCCESS;	// 到管理员界面
-		} else if(user != null) {
-			if(user.getIden().equals(User.TEACHER)) {
+		} else if (user != null) {
+			if (user.getIden().equals(User.TEACHER)) {
 				return TEACHER;	// 到老师界面
-			} else if(user.getIden().equals(User.STUDENT)) {
+			} else if (user.getIden().equals(User.STUDENT)) {
 				return STUDENT; // 到学生界面
 			}
 		}
 		return ERROR;
+	}
+
+	public List<Course> getMyCourseList() {
+		return myCourseList;
+	}
+
+	public void setMyCourseList(List<Course> myCourseList) {
+		this.myCourseList = myCourseList;
 	}
 
 	public List<User> getTeacherList() {

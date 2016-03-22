@@ -127,11 +127,17 @@
 					<tr>
 						<s:iterator id="stu" value="studentList">
 						<s:if test="%{#stu.id == session.user.id}">
-						<td class="first_col">上传作业：</td>
+							<td class="first_col">上传作业：</td>
 							<td>
 								<a href="javascript:;" class="file" id="">选择文件
 									<input type="file" name="myAssignment" id="${ass.id}">
-									<span class="${ass.id}"></span>
+									<span class="${ass.id}">
+										<s:iterator id="sa" value="saList">
+										<s:if test="%{#sa.assignmentid == #ass.id && #sa.studentid == session.user.userid}">
+											${sa.fileName}
+										</s:if>
+										</s:iterator>
+									</span>
 								</a>
 							</td>
 						</s:if>
@@ -144,6 +150,44 @@
 					<tr>
 						<s:iterator id="assistant" value="assistantList">
 						<s:if test="%{#assistant.id == session.user.id}">
+							<td class="first_col">上传作业批改情况：</td>
+							<td>
+								<a href="javascript:;" class="file" id="">选择文件
+									<input type="file" name="myAssignment" id="${ass.id}">
+									<span class="${ass.id}">
+										<s:iterator id="sa" value="saList">
+										<s:if test="%{#sa.assignmentid == #ass.id && #sa.studentid == session.user.userid}">
+											${sa.fileName}
+										</s:if>
+										</s:iterator>
+									</span>
+								</a>
+							</td>
+						</s:if>
+						</s:iterator>
+					</tr>
+					<tr>
+						<td class="first_col description">
+							<span class="button pink" data-toggle="collapse" data-target="#assistant${ass.id}">助教批改情况 </span>
+						</td>
+						<td>
+							<div id="assistant${ass.id}" class="collapse">
+								<div class="list-group">
+									<s:iterator id="sa" value="saList">
+										<s:iterator id="assistant" value="assistantList">
+										<s:if test="%{#sa.studentid == #assistant.userid && #sa.assignmentid == #ass.id}">
+											<a href="fileDownload?file=/uploadfile/assignment/${ass.id}_${sa.fileName}&fileName=${sa.fileName}"
+											class="list-group-item">${sa.fileName}</a>
+										</s:if>
+										</s:iterator>
+									</s:iterator>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<s:iterator id="assistant" value="assistantList">
+						<s:if test="%{#assistant.id == session.user.id">
 							<td class="first_col description">
 								<span class="button pink" data-toggle="collapse" data-target="#sa${ass.id}">全部学生作业 </span>
 							</td>
@@ -151,8 +195,9 @@
 								<div id="sa${ass.id}" class="collapse">
 									<div class="list-group">
 										<s:iterator id="sa" value="saList">
-										<s:if test="%{#sa.assignmentid == #ass.id}">
-											<a href="fileDownload?file=/uploadfile/assignment/${ass.id}_${sa.fileName}&fileName=${sa.fileName}" class="list-group-item">${sa.fileName}</a> 	
+										<s:if test="%{#sa.assignmentid == #ass.id && #sa.studentid != session.user.userid}">
+											<a href="fileDownload?file=/uploadfile/assignment/${ass.id}_${sa.fileName}&fileName=${sa.fileName}"
+											class="list-group-item">${sa.fileName}</a> 	
 										</s:if>
 										</s:iterator>
 									</div>
@@ -161,6 +206,25 @@
 						</s:if>
 						</s:iterator>
 					</tr>
+					<s:if test="%{session.user.iden == 'Teacher'}">
+						<tr>
+							<td class="first_col description">
+								<span class="button pink" data-toggle="collapse" data-target="#sa${ass.id}">全部学生作业 </span>
+							</td>
+							<td>
+								<div id="sa${ass.id}" class="collapse">
+									<div class="list-group">
+										<s:iterator id="sa" value="saList">
+										<s:if test="%{#sa.assignmentid == #ass.id}">
+											<a href="fileDownload?file=/uploadfile/assignment/${ass.id}_${sa.fileName}&fileName=${sa.fileName}"
+											class="list-group-item">${sa.fileName}</a>
+										</s:if>
+										</s:iterator>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</s:if>
 				</table>
 			</div>
 			</s:iterator>

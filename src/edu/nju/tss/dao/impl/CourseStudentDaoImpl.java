@@ -55,4 +55,10 @@ public class CourseStudentDaoImpl implements CourseStudentDao {
 		query.executeUpdate();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CourseStudent> list() {
+		return (List<CourseStudent>)baseDao.getAllList(CourseStudent.class);
+	}
+
 }

@@ -49,4 +49,8 @@ public interface CourseManageService {
 
 	public void updateStudentAssignment(StudentAssignment sa);
 
+	public List<CourseStudent> csList();
+
+	public List<Course> myCourseList(String userid);
+
 }

@@ -22,6 +22,7 @@
 		<ul class="nav navbar-nav">
 			<li><a href="<%=request.getContextPath() + "/admin/userlist" %>">用户管理 </a></li>
 			<li class="active"><a href="<%=request.getContextPath() + "/admin/courselist" %>">教学计划 </a></li>
+			<li><a href="<%=request.getContextPath() + "/admin/statistics.jsp" %>">统计 </a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href=""><img class="avatar" src="<jsp:getProperty name="admin" property="avatar" />">

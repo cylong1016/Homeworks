@@ -13,4 +13,6 @@ public interface CourseStudentDao {
 	public List<CourseStudent> findStudent(String cid);
 
 	public void delete(String stuid, String courseid);
+
+	public List<CourseStudent> list();
 }
