@@ -14,16 +14,16 @@ public class FileDownloadAction extends BaseAction {
 	private static final long serialVersionUID = -2977376776370857540L;
 
 	private String file;
+	private String fileName;
 
 	public String download() {
-		System.out.println("file:" + file);
 		return SUCCESS;
 	}
 
 	//返回一个输入流，作为一个客户端来说是一个输入流，但对于服务器端是一个 输出流  
 	public InputStream getDownloadFile() throws Exception {
 		//获取资源路径  
-		return ServletActionContext.getServletContext().getResourceAsStream("\\uploadfile\\" + file);
+		return ServletActionContext.getServletContext().getResourceAsStream(file);
 	}
 
 	public String getFile() {
@@ -32,6 +32,14 @@ public class FileDownloadAction extends BaseAction {
 
 	public void setFile(String file) {
 		this.file = file;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 }

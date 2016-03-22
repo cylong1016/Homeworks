@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import edu.nju.tss.action.BaseAction;
 import edu.nju.tss.model.Assignment;
 import edu.nju.tss.model.Course;
+import edu.nju.tss.model.StudentAssignment;
 import edu.nju.tss.model.User;
 import edu.nju.tss.service.CourseManageService;
 import edu.nju.tss.service.UserManageService;
@@ -27,6 +28,7 @@ public class CourseInfoAction extends BaseAction {
 	private List<User> assistantList;
 	private String message;
 	private List<Assignment> assignmentList;
+	private List<StudentAssignment> saList;
 
 	public String findCourse() {
 		if (session.get("user") == null) {
@@ -39,8 +41,19 @@ public class CourseInfoAction extends BaseAction {
 		course.setIname(user.getName());
 		assistantList = courseService.findAssistant(cid);
 		assignmentList = courseService.findAssignment(cid);
+		saList = courseService.findAllStudentAssignment(cid);
 		return SUCCESS;
 	}
+	
+	public List<StudentAssignment> getSaList() {
+		return saList;
+	}
+
+	public void setSaList(List<StudentAssignment> saList) {
+		this.saList = saList;
+	}
+
+
 
 	public List<Assignment> getAssignmentList() {
 		return assignmentList;

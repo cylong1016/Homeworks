@@ -6,6 +6,7 @@ import edu.nju.tss.model.Assignment;
 import edu.nju.tss.model.Course;
 import edu.nju.tss.model.CourseAssistants;
 import edu.nju.tss.model.CourseStudent;
+import edu.nju.tss.model.StudentAssignment;
 import edu.nju.tss.model.User;
 
 public interface CourseManageService {
@@ -37,5 +38,15 @@ public interface CourseManageService {
 	public void addCourseStudent(String courseid, String stuid);
 
 	public List<User> findStudent(String cid);
+
+	public void deleteStudent(String uid, String courseid);
+
+	public void addStudentAssignment(StudentAssignment sa);
+
+	public StudentAssignment findStudentAssignment(String studentid, String assignmentid);
+
+	public List<StudentAssignment> findAllStudentAssignment(String cid);
+
+	public void updateStudentAssignment(StudentAssignment sa);
 
 }

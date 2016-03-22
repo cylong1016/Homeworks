@@ -48,3 +48,10 @@ function upd(data, hint, url) {
 		}
 	});  
 }
+
+function msghint(message, hint) {
+	hint.text(message);
+	hint.css("visibility", "visible");
+	hint.fadeIn("fast");
+	hint.fadeOut(3000);	// 几秒后消失
+}

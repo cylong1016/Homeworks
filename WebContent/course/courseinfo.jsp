@@ -14,6 +14,7 @@
 	<link href="<%=request.getContextPath() + "/css/courseinfo.css" %>" rel="stylesheet">
 	<link href="<%=request.getContextPath() + "/css/tableinfo.css" %>" rel="stylesheet">
 	<link href="<%=request.getContextPath() + "/css/tablelist.css" %>" rel="stylesheet">
+	<link href="<%=request.getContextPath() + "/css/input.css" %>" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -72,6 +73,18 @@
 						</td>
 					</tr>
 					<tr>
+						<td class="first_col">课程助教：</td>
+						<td>
+							<s:iterator id="assistant" value="assistantList">
+								<s:a namespace="/user" action="userinfo"  target="external">
+									<s:param name="uid" value="#assistant.id"></s:param>
+									${assistant.name}
+								</s:a>
+								&nbsp;&nbsp;
+							</s:iterator>
+						</td>
+					</tr>
+					<tr>
 						<td class="first_col">开课时间：</td>
 						<td><s:property value="course.semester" /></td>
 					</tr>
@@ -109,15 +122,44 @@
 					</tr>
 					<tr>
 						<td class="first_col">附件：</td>
-						<td><a href="fileDownload?file=${ass.fileName}">${ass.fileName}</a></td>
+						<td><a href="fileDownload?file=/uploadfile/${ass.fileName}&fileName=${ass.fileName}">${ass.fileName}</a></td>
+					</tr>
+					<tr>
+						<s:iterator id="stu" value="studentList">
+						<s:if test="%{#stu.id == session.user.id}">
+						<td class="first_col">上传作业：</td>
+							<td>
+								<a href="javascript:;" class="file" id="">选择文件
+									<input type="file" name="myAssignment" id="${ass.id}">
+									<span class="${ass.id}"></span>
+								</a>
+							</td>
+						</s:if>
+						</s:iterator>
 					</tr>
 					<tr>
 						<td class="first_col description">作业描述：</td>
 						<td> ${ass.description}</td>
 					</tr>
 					<tr>
-						<td class="first_col description">上传作业：</td>
-						<td>稍后完成</td>
+						<s:iterator id="assistant" value="assistantList">
+						<s:if test="%{#assistant.id == session.user.id}">
+							<td class="first_col description">
+								<span class="button pink" data-toggle="collapse" data-target="#sa${ass.id}">全部学生作业 </span>
+							</td>
+							<td>
+								<div id="sa${ass.id}" class="collapse">
+									<div class="list-group">
+										<s:iterator id="sa" value="saList">
+										<s:if test="%{#sa.assignmentid == #ass.id}">
+											<a href="fileDownload?file=/uploadfile/assignment/${ass.id}_${sa.fileName}&fileName=${sa.fileName}" class="list-group-item">${sa.fileName}</a> 	
+										</s:if>
+										</s:iterator>
+									</div>
+								</div>
+							</td>
+						</s:if>
+						</s:iterator>
 					</tr>
 				</table>
 			</div>
@@ -132,7 +174,7 @@
 				</div>
 			</div>
 			<div class="content">
-				<table class="list">
+				<table class="list" id="student_list_table">
 					<tr>
 						<th>姓名</th>
 						<th>账号</th>
@@ -153,7 +195,7 @@
 							<td>${stu.sex}</td>
 							<td>${stu.phone}</td>
 							<td>${stu.mail}</td>
-							<td id="${stu.userid}" class="">删除</td>
+							<td id="${stu.userid}" class="delstu">删除</td>
 						</tr>
 					</s:iterator>
 				</table>
@@ -168,7 +210,7 @@
 				</div>
 			</div>
 			<div class="content">
-				<table class="list">
+				<table class="list" id="assistant_list_table">
 					<tr>
 						<th>姓名</th>
 						<th>账号</th>
@@ -218,7 +260,11 @@
 						</tr>
 						<tr>
 							<td class="first_col">附件</td>
-							<td><input type="file" name="attach"></td>
+							<td>
+								<a href="javascript:;" class="file">选择文件
+									<input type="file" name="attach" id="attachid">
+									<span class="attachid"></span>
+								</a>
 						</tr>
 						<tr>
 							<td class="first_col description">作业描述</td>
@@ -240,12 +286,33 @@
 </body>
 <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
 <script src="<%=request.getContextPath() + "/js/bootstrap.js" %>"></script>
+<script src="<%=request.getContextPath() + "/js/ajaxfileupload.js" %>"></script>
 <script src="<%=request.getContextPath() + "/js/my.js" %>"></script>
 <script>
 	
 	var hint = $("#hint");
 	
-	function adduser(uid, hint, url) {
+	function ajaxFileUpload(fileElementId) {
+		$.ajaxFileUpload ({
+			url: '<%=request.getContextPath() + "/course/uploadMyAssignment" %>',
+			secureuri: false,
+			fileElementId: fileElementId,
+			dataType: 'json',
+			data: {
+				assignmentid: fileElementId,
+				studentid: '<%=((User)session.getAttribute("user")).getUserid() %>',
+				courseid: '<%=((Course)request.getAttribute("course")).getId() %>'
+			},
+			success: function (data) {
+				msghint('上传成功', hint);
+			},
+			error: function (data, status, e) {
+				alert("上传发生异常");
+			}
+		})
+	}
+	
+	function adduser(uid, hint, url, delbtnName) {
 		$.ajax({
 			type : "post",
 			url : url,
@@ -257,10 +324,17 @@
 			dataType : "json",
 			success : function(data) {
 				var d = eval("(" + data + ")");
-				hint.text(d.message);
-				hint.css("visibility", "visible");
-				hint.fadeIn("fast");
-				hint.fadeOut(3000);	// 几秒后消失
+				msghint(d.message, hint);
+				var table = $('#' + d.tableID);
+				var str = "<tr id='tr" + d.user.userid + "'> ";
+				str += "<td><a href='/TSS/user/userinfo?uid=" + d.user.id + "' target='external'>" + d.user.name + "</a></td>";
+				str += "<td>" + d.user.userid + "</td>";
+				str += "<td>" + d.user.sex + "</td>";
+				str += "<td>" + d.user.phone + "</td>";
+				str += "<td>" + d.user.mail + "</td>";
+				str += "<td id='" + d.user.userid + "' class='" + delbtnName + "'>删除</td>";
+				str += "</tr>";
+				table.append(str);
 			},
 			error : function(data) {
 				alert("系统异常，请稍后重试！");
@@ -268,22 +342,19 @@
 		});  
 	}
 	
-	function delass(hint, url, assid) {
+	function deluser(hint, url, uid) {
 		$.ajax({
 			type:"post",
 			url:url,
 			data:{//设置数据源 
-				assid: assid,
+				uid: uid,
 				courseid: "<%=((Course)request.getAttribute("course")).getId() %>"
 			},
 			dataType:"json",
-			success:function(data){
+			success: function(data){
 				var d = eval("(" + data + ")");
-				hint.text(d.message);
-				hint.css("visibility", "visible");
-				hint.fadeIn("fast");
-				hint.fadeOut(3000);	// 几秒后消失
-				$("#tr" + assid).hide(1000);
+				msghint(d.message, hint);
+				$("#tr" + uid).hide(1000);
 			},
 			error:function(){
 				alert("系统异常，请稍后重试！");
@@ -293,16 +364,31 @@
 	
 	$(document).ready(function(){
 		$("#addass").on("click", function() {
-			adduser($("#assistantid").val(), hint, '<%=request.getContextPath() + "/course/addassistant" %>');
+			adduser($("#assistantid").val(), hint, '<%=request.getContextPath() + "/course/addassistant" %>', "delass");
 		});
 		
 		$("#addstu").on("click", function() {
-			adduser($("#studentid").val(), hint, '<%=request.getContextPath() + "/course/addstudent" %>');
+			adduser($("#studentid").val(), hint, '<%=request.getContextPath() + "/course/addstudent" %>', "delstu");
 		});
 		
 		$(".delass").on("click", function() {
-			delass(hint, '<%=request.getContextPath() + "/course/deleteassistant" %>', $(this).attr("id"));
+			deluser(hint, '<%=request.getContextPath() + "/course/deleteassistant" %>', $(this).attr("id"));
 		});
+		
+		$(".delstu").on("click", function() {
+			deluser(hint, '<%=request.getContextPath() + "/course/deletestudent" %>', $(this).attr("id"));
+		});
+		
+		$(".file").on("change", "input[type='file']", function(){
+			var id = $(this).attr("id");
+		    var filePath = $(this).val();
+	        var arr = filePath.split('\\');
+	        var fileName = arr[arr.length-1];
+	        $("." + id).html(fileName);
+	        if(id != "attachid") {
+	        	ajaxFileUpload(id);
+	        }
+		})
 	});
 	
 </script>

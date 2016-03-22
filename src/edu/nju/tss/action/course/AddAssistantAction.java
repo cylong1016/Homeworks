@@ -1,5 +1,8 @@
 package edu.nju.tss.action.course;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -9,6 +12,7 @@ import edu.nju.tss.model.CourseStudent;
 import edu.nju.tss.model.User;
 import edu.nju.tss.service.CourseManageService;
 import edu.nju.tss.service.UserManageService;
+import net.sf.json.JSONObject;
 
 @Controller
 public class AddAssistantAction extends BaseAction {
@@ -26,6 +30,8 @@ public class AddAssistantAction extends BaseAction {
 	private CourseStudent cs;
 
 	public String addAssistant() {
+		//将数据存储在map里，再转换成json类型数据，也可以自己手动构造json类型数据 
+		Map<String,Object> map = new HashMap<String,Object>(); 
 		String assid = request.getParameter("uid");
 		String courseid = request.getParameter("courseid");
 		ca = courseService.findCourseAssistant(assid, courseid);
@@ -42,7 +48,11 @@ public class AddAssistantAction extends BaseAction {
 		assistant = userService.find("userid", assid);
 		if (assistant != null && assistant.getIden().equals(User.STUDENT)) {
 			courseService.addCourseAssistant(courseid, assid);
-			message = "{'message': '添加成功 ！'}";
+			map.put("message", "添加成功！"); 
+			map.put("tableID", "assistant_list_table");
+			map.put("user", assistant);
+			JSONObject json = JSONObject.fromObject(map); //将map对象转换成json类型数据 
+			message = json.toString();
 		} else {
 			message = "{'message': '添加失败！'}";
 		}

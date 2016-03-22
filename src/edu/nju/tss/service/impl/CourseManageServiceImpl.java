@@ -10,11 +10,13 @@ import edu.nju.tss.dao.AssignmentDao;
 import edu.nju.tss.dao.CourseAssistantsDao;
 import edu.nju.tss.dao.CourseDao;
 import edu.nju.tss.dao.CourseStudentDao;
+import edu.nju.tss.dao.StudentAssignmentDao;
 import edu.nju.tss.dao.UserDao;
 import edu.nju.tss.model.Assignment;
 import edu.nju.tss.model.Course;
 import edu.nju.tss.model.CourseAssistants;
 import edu.nju.tss.model.CourseStudent;
+import edu.nju.tss.model.StudentAssignment;
 import edu.nju.tss.model.User;
 import edu.nju.tss.service.CourseManageService;
 
@@ -31,6 +33,8 @@ public class CourseManageServiceImpl implements CourseManageService {
 	private UserDao userDao;
 	@Autowired
 	private AssignmentDao assignmentDao;
+	@Autowired
+	private StudentAssignmentDao studentAssignmentDao;
 
 	@Override
 	public String setCourse(Course course) {
@@ -119,6 +123,31 @@ public class CourseManageServiceImpl implements CourseManageService {
 			studentList.add(user);
 		}
 		return studentList;
+	}
+
+	@Override
+	public void deleteStudent(String uid, String courseid) {
+		courseStudentDao.delete(uid, courseid);
+	}
+
+	@Override
+	public void addStudentAssignment(StudentAssignment sa) {
+		studentAssignmentDao.save(sa);
+	}
+
+	@Override
+	public StudentAssignment findStudentAssignment(String studentid, String assignmentid) {
+		return studentAssignmentDao.find(studentid, assignmentid);
+	}
+
+	@Override
+	public List<StudentAssignment> findAllStudentAssignment(String cid) {
+		return studentAssignmentDao.findAssignmentBy("courseid", cid);
+	}
+
+	@Override
+	public void updateStudentAssignment(StudentAssignment sa) {
+		studentAssignmentDao.update(sa);
 	}
 
 }

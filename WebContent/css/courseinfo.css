@@ -30,6 +30,16 @@ div.content {
 	cursor: pointer;
 }
 
+.delstu {
+	color: #F3726D;
+}
+
+.delstu:HOVER {
+	color: white;
+	background-color: #F3726D;
+	cursor: pointer;
+}
+
 #assign-table td {
 	padding: 5px;
 	border: 0px solid #CCCCCC;

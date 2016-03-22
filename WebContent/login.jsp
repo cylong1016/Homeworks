@@ -28,7 +28,7 @@
                            <span id = "password_error" class="error">请输入密码</span>
 					</div>
 					<div class="bottom">
-						<div class="remember"><input type="checkbox" name="save_pass" value="true" checked /><span>保持登陆</span></div>
+						<%-- <div class="remember"><input type="checkbox" name="save_pass" value="true" checked /><span>保持登陆</span></div> --%>
 						<input class="button pink" type="submit" onclick="return check_input()" value="登陆">
 						<div class="clear"></div>
 					</div>
