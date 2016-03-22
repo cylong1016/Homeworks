@@ -30,22 +30,22 @@ public class CourseListAction extends BaseAction {
 		Admin admin = (Admin)session.get("admin");
 		User user = (User)session.get("user");
 		courseList = courseService.courseList();
-		if(user != null) {
-			myCourseList = courseService.myCourseList(user.getUserid());
-		}
 		teacherList = userService.teacherList();
 		Collections.sort(courseList);
-		Collections.sort(myCourseList);
 		List<?> userList = userService.userList();
-		for(Course course : courseList) {
-			for(Object o : userList) {
-				User userTemp = (User)o;
-				if (userTemp.getId().equals(course.getInstructor())) {
-					course.setIname(userTemp.getName());
+		if(user != null) {
+			myCourseList = courseService.myCourseList(user.getUserid());
+			Collections.sort(myCourseList);
+			for(Course course : myCourseList) {
+				for(Object o : userList) {
+					User userTemp = (User)o;
+					if (userTemp.getId().equals(course.getInstructor())) {
+						course.setIname(userTemp.getName());
+					}
 				}
 			}
 		}
-		for(Course course : myCourseList) {
+		for(Course course : courseList) {
 			for(Object o : userList) {
 				User userTemp = (User)o;
 				if (userTemp.getId().equals(course.getInstructor())) {

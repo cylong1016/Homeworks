@@ -66,7 +66,7 @@
 					<tr>
 						<td class="first_col">任课教师：</td>
 						<td>
-							<s:a namespace="/user" action="userinfo">
+							<s:a namespace="/user" action="userinfo" target="external">
 								<s:param name="uid" value="course.instructor"></s:param>
 								${course.iname}
 							</s:a>
@@ -187,7 +187,7 @@
 					</tr>
 					<tr>
 						<s:iterator id="assistant" value="assistantList">
-						<s:if test="%{#assistant.id == session.user.id">
+						<s:if test="%{#assistant.id == session.user.id}">
 							<td class="first_col description">
 								<span class="button pink" data-toggle="collapse" data-target="#sa${ass.id}">全部学生作业 </span>
 							</td>
