@@ -55,7 +55,7 @@
 					</div>
 					<div style="width: auto; margin: 0 30px 0 0; float: right;">
 						<h2>分数情况</h2>
-						<canvas id="assignmentsScore_linux" height="150" width="150"></canvas>
+						<canvas id="assignmentsScore_linux" height="200" width="200"></canvas>
 					</div>
 					<div class="clear"></div>
 				</div>
